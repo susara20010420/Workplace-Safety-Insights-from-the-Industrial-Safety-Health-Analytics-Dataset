@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>WHSAT · Safety KPI Dashboard</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ── reset & base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background: #0b0f1a;
+            color: #e8edf5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── scrollbar ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a2332;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a8bf2;
+            border-radius: 8px;
+        }
+
+        /* ── top nav ── */
+        .navbar {
+            background: #101827;
+            padding: 0 28px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #1f2a3f;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 20px;
+            letter-spacing: 0.3px;
+            color: #f0f4fe;
+        }
+        .logo i {
+            color: #2a8bf2;
+            font-size: 26px;
+        }
+        .logo span {
+            color: #5f9ef0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .nav-links button {
+            background: transparent;
+            border: none;
+            color: #8b9bb8;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links button i {
+            font-size: 15px;
+        }
+        .nav-links button:hover {
+            background: #1f2a3f;
+            color: #d6e2f5;
+        }
+        .nav-links button.active {
+            background: #1d3a5c;
+            color: #7bb3ff;
+            box-shadow: inset 0 0 0 1px #2a5f8f;
+        }
+
+        /* ── main layout ── */
+        .app-container {
+            flex: 1;
+            padding: 24px 28px 32px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0.4;
+                transform: translateY(8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── KPI cards ── */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+        .kpi-card {
+            background: #141d2b;
+            border-radius: 16px;
+            padding: 18px 20px 16px;
+            border: 1px solid #1f2a3f;
+            transition: 0.2s;
+        }
+        .kpi-card:hover {
+            border-color: #2a4b70;
+        }
+        .kpi-card .label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7c91b0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .kpi-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 6px;
+            color: #f0f4fe;
+        }
+        .kpi-card .sub {
+            font-size: 13px;
+            color: #6f87aa;
+            margin-top: 4px;
+        }
+        .kpi-card .trend-up {
+            color: #4ade80;
+        }
+        .kpi-card .trend-down {
+            color: #f87171;
+        }
+
+        /* ── chart cards ── */
+        .card {
+            background: #141d2b;
+            border-radius: 16px;
+            padding: 20px 22px 24px;
+            border: 1px solid #1f2a3f;
+            margin-bottom: 24px;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .card-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e8edf5;
+        }
+        .card-header .badge {
+            background: #1d3a5c;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: #7bb3ff;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 250px;
+        }
+        .chart-wrapper.tall {
+            height: 320px;
+        }
+
+        /* ── two‑column layout ── */
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 820px) {
+            .row-2 {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
+                height: auto;
+                padding: 12px 16px;
+            }
+            .nav-links button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .app-container {
+                padding: 16px;
+            }
+        }
+
+        /* ── heatmap / table ── */
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: 100px repeat(5, 1fr);
+            gap: 4px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        .heatmap-grid .header {
+            font-weight: 600;
+            color: #7c91b0;
+            padding: 6px 4px;
+            text-align: center;
+            background: #0f1724;
+            border-radius: 6px;
+        }
+        .heatmap-grid .cell {
+            padding: 8px 4px;
+            text-align: center;
+            border-radius: 6px;
+            background: #1a2332;
+            color: #c8d6e8;
+            transition: 0.15s;
+        }
+        .heatmap-grid .cell.high {
+            background: #b91c1c;
+            color: #fff;
+        }
+        .heatmap-grid .cell.med {
+            background: #b45309;
+            color: #fff;
+        }
+        .heatmap-grid .cell.low {
+            background: #1e5631;
+            color: #c8e6d0;
+        }
+        .heatmap-grid .cell.none {
+            background: #18212e;
+            color: #5a6f8a;
+        }
+        .heatmap-grid .row-label {
+            font-weight: 500;
+            color: #9aafcc;
+            display: flex;
+            align-items: center;
+            padding-left: 4px;
+        }
+
+        /* ── checklist / memo ── */
+        .memo-box {
+            background: #0f1724;
+            border-left: 4px solid #2a8bf2;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        .memo-box h4 {
+            color: #7bb3ff;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+        .memo-box p,
+        .memo-box li {
+            color: #c8d6e8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .memo-box ul {
+            padding-left: 20px;
+            margin-top: 6px;
+        }
+        .risk-band {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .risk-critical {
+            background: #7f1d1d;
+            color: #fca5a5;
+        }
+        .risk-high {
+            background: #7c2d12;
+            color: #fdba74;
+        }
+        .risk-medium {
+            background: #78350f;
+            color: #fcd34d;
+        }
+        .risk-low {
+            background: #14532d;
+            color: #86efac;
+        }
+
+        /* ── checklist items ── */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #101827;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #2a8bf2;
+        }
+        .checklist-item .hazard {
+            font-weight: 500;
+            color: #e8edf5;
+            flex: 1;
+        }
+        .checklist-item .controls {
+            color: #8b9bb8;
+            font-size: 14px;
+        }
+        .checklist-item .tag {
+            background: #1d3a5c;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: #7bb3ff;
+        }
+
+        /* ── misc ── */
+        .text-muted {
+            color: #6f87aa;
+            font-size: 13px;
+        }
+        .flex {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .gap-2 {
+            gap: 8px;
+        }
+        .mt-2 {
+            margin-top: 12px;
+        }
+        .mb-2 {
+            margin-bottom: 12px;
+        }
+
+        /* ── KG Explorer ── */
+        .kg-node {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            margin: 3px 4px 3px 0;
+        }
+        .kg-task {
+            background: #1e3a5f;
+            color: #7bb3ff;
+        }
+        .kg-hazard {
+            background: #5f1e1e;
+            color: #fca5a5;
+        }
+        .kg-control {
+            background: #1e4a2e;
+            color: #86efac;
+        }
+        .kg-missing {
+            background: #4a1e2e;
+            color: #f87171;
+        }
+        .kg-arrow {
+            color: #4a6f8f;
+            margin: 0 4px;
+        }
+
+        /* responsive tweaks */
+        @media (max-width: 600px) {
+            .kpi-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .kpi-card .value {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-shield-halved"></i>
+            <span>WHSAT</span> · Safety KPI
+        </div>
+        <div class="nav-links" id="navLinks">
+            <button class="active" data-page="page-overview"><i class="fas fa-gauge-high"></i> Overview</button>
+            <button data-page="page-trends"><i class="fas fa-chart-line"></i> Trends</button>
+            <button data-page="page-heatmap"><i class="fas fa-fire"></i> Near‑Miss Gaps</button>
+            <button data-page="page-uncertainty"><i class="fas fa-circle-half-stroke"></i> Uncertainty</button>
+            <button data-page="page-kg"><i class="fas fa-project-diagram"></i> KG Motif</button>
+            <button data-page="page-memo"><i class="fas fa-memo"></i> Memo</button>
+            <button data-page="page-checklist"><i class="fas fa-list-check"></i> Checklists</button>
+        </div>
+    </nav>
+
+    <!-- ═══ APP ═══ -->
+    <div class="app-container">
+
+        <!-- ─── PAGE 1: OVERVIEW ─── -->
+        <section id="page-overview" class="page active">
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-users"></i> Total Incidents</div>
+                    <div class="value">1,284</div>
+                    <div class="sub"><span class="trend-down">↓ 12%</span> vs last quarter</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-triangle-exclamation"></i> High Severity</div>
+                    <div class="value">87</div>
+                    <div class="sub"><span class="trend-up">↑ 4%</span> vs last quarter</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-arrow-trend-up"></i> Near‑Miss Gap</div>
+                    <div class="value">2.4</div>
+                    <div class="sub">avg. potential – actual severity</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-circle-check"></i> Controls in place</div>
+                    <div class="value">73%</div>
+                    <div class="sub"><span class="trend-up">↑ 6%</span> coverage</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-clock"></i> Avg. Response</div>
+                    <div class="value">42<small style="font-size:16px;color:#7c91b0;">min</small></div>
+                    <div class="sub"><span class="trend-down">↓ 8%</span> faster</div>
+                </div>
+            </div>
+
+            <div class="row-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar" style="color:#2a8bf2;"></i> Severity Distribution</h3>
+                        <span class="badge">by incident count</span>
+                    </div>
+                    <div class="chart-wrapper"><canvas id="chartSeverityDist"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-arrow-trend-up"></i> Near‑Miss Gap by Severity</h3>
+                        <span class="badge">potential – actual</span>
+                    </div>
+                    <div class="chart-wrapper"><canvas id="chartGapBySeverity"></canvas></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-calendar-week"></i> Incident Trend (last 12 weeks)</h3>
+                    <span class="badge">weekly rolling</span>
+                </div>
+                <div class="chart-wrapper"><canvas id="chartTrend"></canvas></div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE 2: TRENDS ─── -->
+        <section id="page-trends" class="page">
+            <div class="row-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-calendar-day"></i> Daily Incidents</h3>
+                        <span class="badge">last 30 days</span>
+                    </div>
+                    <div class="chart-wrapper tall"><canvas id="chartDaily"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-building"></i> Severity by Department</h3>
+                        <span class="badge">top 5</span>
+                    </div>
+                    <div class="chart-wrapper tall"><canvas id="chartDeptSeverity"></canvas></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-clock"></i> Average Near‑Miss Gap by Department</h3>
+                    <span class="badge">higher = more missed prevention</span>
+                </div>
+                <div class="chart-wrapper"><canvas id="chartDeptGap"></canvas></div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE 3: NEAR‑MISS HEATMAP ─── -->
+        <section id="page-heatmap" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-fire"></i> Near‑Miss Gap Heatmap</h3>
+                    <span class="badge">severity × department</span>
+                </div>
+                <div style="overflow-x:auto;">
+                    <div class="heatmap-grid" id="heatmapContainer">
+                        <!-- injected by JS -->
+                    </div>
+                </div>
+                <div class="text-muted mt-2" style="display:flex;gap:18px;flex-wrap:wrap;">
+                    <span><span style="display:inline-block;width:14px;height:14px;background:#b91c1c;border-radius:4px;"></span> High gap (≥3)</span>
+                    <span><span style="display:inline-block;width:14px;height:14px;background:#b45309;border-radius:4px;"></span> Medium (1.5–2.9)</span>
+                    <span><span style="display:inline-block;width:14px;height:14px;background:#1e5631;border-radius:4px;"></span> Low (&lt;1.5)</span>
+                    <span><span style="display:inline-block;width:14px;height:14px;background:#18212e;border-radius:4px;"></span> No data</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-pie"></i> Gap Distribution</h3>
+                    <span class="badge">% of incidents</span>
+                </div>
+                <div class="chart-wrapper"><canvas id="chartGapPie"></canvas></div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE 4: UNCERTAINTY ─── -->
+        <section id="page-uncertainty" class="page">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-circle-half-stroke"></i> Avg. Confidence</div>
+                    <div class="value">81<small style="font-size:18px;color:#7c91b0;">%</small></div>
+                    <div class="sub">± 6% calibration error</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-triangle-exclamation"></i> High‑uncertainty cases</div>
+                    <div class="value">43</div>
+                    <div class="sub">confidence &lt; 60%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label"><i class="fas fa-arrows-spin"></i> ECE Score</div>
+                    <div class="value">0.09</div>
+                    <div class="sub">expected calibration error</div>
+                </div>
+            </div>
+            <div class="row-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-bullseye"></i> Calibration Curve</h3>
+                        <span class="badge">ensemble</span>
+                    </div>
+                    <div class="chart-wrapper tall"><canvas id="chartCalibration"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-uncertainty"></i> Confidence vs. Accuracy</h3>
+                        <span class="badge">by severity</span>
+                    </div>
+                    <div class="chart-wrapper tall"><canvas id="chartConfidence"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE 5: KG MOTIF EXPLORER ─── -->
+        <section id="page-kg" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-project-diagram"></i> Task–Hazard–Control Motifs</h3>
+                    <span class="badge">top patterns</span>
+                </div>
+                <div id="kgMotifContainer" style="display:flex;flex-direction:column;gap:12px;">
+                    <!-- injected by JS -->
+                </div>
+                <div class="text-muted mt-2">
+                    <i class="fas fa-circle kg-task" style="background:#1e3a5f;color:#7bb3ff;width:12px;height:12px;display:inline-block;border-radius:50%;"></i> Task &nbsp;
+                    <i class="fas fa-circle kg-hazard" style="background:#5f1e1e;color:#fca5a5;width:12px;height:12px;display:inline-block;border-radius:50%;"></i> Hazard &nbsp;
+                    <i class="fas fa-circle kg-control" style="background:#1e4a2e;color:#86efac;width:12px;height:12px;display:inline-block;border-radius:50%;"></i> Control &nbsp;
+                    <i class="fas fa-circle kg-missing" style="background:#4a1e2e;color:#f87171;width:12px;height:12px;display:inline-block;border-radius:50%;"></i> Missing Control
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-magnifying-glass"></i> Top Hazards Lacking Controls</h3>
+                    <span class="badge">KG‑grounded</span>
+                </div>
+                <div id="missingControlsContainer">
+                    <!-- injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE 6: MEMO ─── -->
+        <section id="page-memo" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-memo"></i> Actionable Recommendations</h3>
+                    <span class="badge">calibrated risk bands</span>
+                </div>
+                <div id="memoContainer">
+                    <!-- injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE 7: CHECKLISTS ─── -->
+        <section id="page-checklist" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list-check"></i> KG‑Grounded Checklists</h3>
+                    <span class="badge">top hazards lacking controls</span>
+                </div>
+                <div id="checklistContainer">
+                    <!-- injected by JS -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════
+        //  1. NAVIGATION
+        // ═══════════════════════════════════════════════════════════
+        const navBtns = document.querySelectorAll('.nav-links button');
+        const pages = {
+            overview: document.getElementById('page-overview'),
+            trends: document.getElementById('page-trends'),
+            heatmap: document.getElementById('page-heatmap'),
+            uncertainty: document.getElementById('page-uncertainty'),
+            kg: document.getElementById('page-kg'),
+            memo: document.getElementById('page-memo'),
+            checklist: document.getElementById('page-checklist'),
+        };
+
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                navBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const pageId = btn.dataset.page;
+                Object.values(pages).forEach(p => p.classList.remove('active'));
+                const target = document.getElementById(pageId);
+                if (target) target.classList.add('active');
+                // resize charts after transition
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('resize'));
+                }, 80);
+            });
+        });
+
+        // ═══════════════════════════════════════════════════════════
+        //  2. HELPER: random data (simulates real predictions)
+        // ═══════════════════════════════════════════════════════════
+        function rand(min, max) { return Math.round((Math.random() * (max - min) + min) * 10) / 10; }
+
+        function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+        const departments = ['Cardiology', 'Dermatology', 'Gynaecology', 'Neurology', 'Oncology', 'Orthopaedics', 'Surgery'];
+
+        // ─── severity distribution ───
+        const severityData = {
+            labels: ['Severity 1 (Low)', 'Severity 2', 'Severity 3', 'Severity 4', 'Severity 5 (Critical)'],
+            counts: [420, 310, 240, 180, 134],
+        };
+
+        // ─── gap by severity ───
+        const gapBySeverity = {
+            labels: ['Sev 1', 'Sev 2', 'Sev 3', 'Sev 4', 'Sev 5'],
+            gaps: [1.2, 1.8, 2.5, 3.2, 4.0],
+        };
+
+        // ─── weekly trend ───
+        const weeks = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10', 'W11', 'W12'];
+        const incidentTrend = [18, 22, 19, 27, 24, 31, 28, 35, 30, 26, 32, 29];
+
+        // ─── daily ───
+        const days = Array.from({ length: 30 }, (_, i) => `D${i + 1}`);
+        const dailyIncidents = days.map(() => randInt(6, 18));
+
+        // ─── dept severity ───
+        const deptSeverity = {
+            labels: departments.slice(0, 5),
+            data: [12, 18, 9, 14, 8],
+        };
+
+        // ─── dept gap ───
+        const deptGap = {
+            labels: departments,
+            data: departments.map(() => rand(0.8, 3.6)),
+        };
+
+        // ─── heatmap ───
+        const heatmapDepts = departments;
+        const heatmapSeverities = ['Sev 1', 'Sev 2', 'Sev 3', 'Sev 4', 'Sev 5'];
+        const heatmapData = heatmapDepts.map(() =>
+            heatmapSeverities.map(() => {
+                const v = rand(0.2, 4.2);
+                if (v < 1.5) return 'low';
+                if (v < 3.0) return 'med';
+                return 'high';
+            })
+        );
+
+        // ─── KG motifs ───
+        const motifs = [
+            { task: 'Working at height', hazard: 'Fall from height', control: 'Harness', missing: false },
+            { task: 'Forklift operation', hazard: 'Struck by vehicle', control: 'Training', missing: false },
+            { task: 'Chemical handling', hazard: 'Chemical exposure', control: 'PPE', missing: false },
+            { task: 'Electrical maintenance', hazard: 'Electrocution', control: 'Lockout/tagout', missing: false },
+            { task: 'Confined space entry', hazard: 'Asphyxiation', control: null, missing: true },
+            { task: 'Heavy lifting', hazard: 'Musculoskeletal injury', control: null, missing: true },
+            { task: 'Welding', hazard: 'Fire / burns', control: 'Fire extinguisher', missing: false },
+            { task: 'Roof work', hazard: 'Fall from height', control: null, missing: true },
+        ];
+
+        // ─── missing controls ───
+        const missingControls = [
+            { hazard: 'Fall from height', count: 23, dept: 'Surgery' },
+            { hazard: 'Asphyxiation', count: 17, dept: 'Oncology' },
+            { hazard: 'Musculoskeletal injury', count: 14, dept: 'Orthopaedics' },
+            { hazard: 'Chemical exposure', count: 11, dept: 'Dermatology' },
+            { hazard: 'Struck by object', count: 9, dept: 'Cardiology' },
+            { hazard: 'Burn / fire', count: 7, dept: 'Gynaecology' },
+        ];
+
+        // ─── memo recommendations ───
+        const memoData = [{
+            band: 'Critical',
+            bandClass: 'risk-critical',
+            title: 'Immediate action required: Fall from height',
+            desc: '3 incidents with missing harness controls in Surgery & Orthopaedics. Enforce 100% harness use for all work >2m.'
+        }, {
+            band: 'High',
+            bandClass: 'risk-high',
+            title: 'Asphyxiation risk in confined spaces',
+            desc: '17 near‑miss events without gas monitoring. Install mandatory gas detectors and buddy systems.'
+        }, {
+            band: 'Medium',
+            bandClass: 'risk-medium',
+            title: 'Musculoskeletal injuries from manual lifting',
+            desc: '14 incidents lacking mechanical aids. Provide lifting equipment and training for heavy loads.'
+        }, {
+            band: 'Low',
+            bandClass: 'risk-low',
+            title: 'Chemical PPE compliance',
+            desc: 'Improve PPE availability and signage in Dermatology / Oncology units.'
+        }, ];
+
+        // ─── checklist items ───
+        const checklistItems = [
+            { hazard: 'Fall from height', controls: 'Harness, Guardrail, Safety net', dept: 'Surgery, Orthopaedics' },
+            { hazard: 'Asphyxiation', controls: 'Gas detector, Ventilation, Rescue plan', dept: 'Oncology' },
+            { hazard: 'Musculoskeletal injury', controls: 'Mechanical lift, Training, Ergonomic tools', dept: 'Orthopaedics' },
+            { hazard: 'Chemical exposure', controls: 'PPE, Fume hood, Emergency shower', dept: 'Dermatology' },
+            { hazard: 'Struck by object', controls: 'Hard hat, Warning signs, Barriers', dept: 'Cardiology' },
+        ];
+
+        // ═══════════════════════════════════════════════════════════
+        //  3. RENDER CHARTS
+        // ═══════════════════════════════════════════════════════════
+        const chartDefaults = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#c8d6e8', font: { size: 12 } } }
+            },
+            scales: {
+                x: { ticks: { color: '#7c91b0' }, grid: { color: '#1f2a3f' } },
+                y: { ticks: { color: '#7c91b0' }, grid: { color: '#1f2a3f' } }
+            }
+        };
+
+        // 3.1 Severity Distribution
+        new Chart(document.getElementById('chartSeverityDist'), {
+            type: 'bar',
+            data: {
+                labels: severityData.labels,
+                datasets: [{
+                    label: 'Incidents',
+                    data: severityData.counts,
+                    backgroundColor: ['#2a8bf2', '#3b9eff', '#5f9ef0', '#f59e0b', '#ef4444'],
+                    borderRadius: 6,
+                }]
+            },
+            options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: false } } }
+        });
+
+        // 3.2 Gap by Severity
+        new Chart(document.getElementById('chartGapBySeverity'), {
+            type: 'bar',
+            data: {
+                labels: gapBySeverity.labels,
+                datasets: [{
+                    label: 'Near‑Miss Gap',
+                    data: gapBySeverity.gaps,
+                    backgroundColor: ['#1e5631', '#b45309', '#b45309', '#b91c1c', '#b91c1c'],
+                    borderRadius: 6,
+                }]
+            },
+            options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: false } } }
+        });
+
+        // 3.3 Weekly Trend
+        new Chart(document.getElementById('chartTrend'), {
+            type: 'line',
+            data: {
+                labels: weeks,
+                datasets: [{
+                    label: 'Incidents',
+                    data: incidentTrend,
+                    borderColor: '#2a8bf2',
+                    backgroundColor: 'rgba(42,139,242,0.08)',
+                    fill: true,
+                    tension: 0.3,
+                    pointBackgroundColor: '#2a8bf2',
+                }]
+            },
+            options: { ...chartDefaults }
+        });
+
+        // 3.4 Daily
+        new Chart(document.getElementById('chartDaily'), {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [{
+                    label: 'Incidents',
+                    data: dailyIncidents,
+                    backgroundColor: '#2a8bf2',
+                    borderRadius: 4,
+                }]
+            },
+            options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: false } } }
+        });
+
+        // 3.5 Dept Severity
+        new Chart(document.getElementById('chartDeptSeverity'), {
+            type: 'bar',
+            data: {
+                labels: deptSeverity.labels,
+                datasets: [{
+                    label: 'High‑severity incidents',
+                    data: deptSeverity.data,
+                    backgroundColor: ['#ef4444', '#f59e0b', '#2a8bf2', '#3b9eff', '#5f9ef0'],
+                    borderRadius: 6,
+                }]
+            },
+            options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: false } } }
+        });
+
+        // 3.6 Dept Gap
+        new Chart(document.getElementById('chartDeptGap'), {
+            type: 'bar',
+            data: {
+                labels: deptGap.labels,
+                datasets: [{
+                    label: 'Avg. gap',
+                    data: deptGap.data,
+                    backgroundColor: deptGap.data.map(v => v > 3 ? '#b91c1c' : v > 2 ? '#b45309' : '#1e5631'),
+                    borderRadius: 6,
+                }]
+            },
+            options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: false } } }
+        });
+
+        // 3.7 Gap Pie
+        new Chart(document.getElementById('chartGapPie'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Low gap (<1.5)', 'Medium gap (1.5–2.9)', 'High gap (≥3)'],
+                datasets: [{
+                    data: [42, 35, 23],
+                    backgroundColor: ['#1e5631', '#b45309', '#b91c1c'],
+                    borderColor: '#141d2b',
+                    borderWidth: 3,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#c8d6e8' } } }
+            }
+        });
+
+        // 3.8 Calibration
+        new Chart(document.getElementById('chartCalibration'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Ensemble',
+                    data: [
+                        { x: 0.1, y: 0.08 }, { x: 0.25, y: 0.22 }, { x: 0.4, y: 0.38 },
+                        { x: 0.55, y: 0.52 }, { x: 0.7, y: 0.68 }, { x: 0.85, y: 0.82 },
+                        { x: 0.95, y: 0.94 }
+                    ],
+                    backgroundColor: '#2a8bf2',
+                    pointRadius: 6,
+                }, {
+                    label: 'Perfect',
+                    data: [
+                        { x: 0, y: 0 }, { x: 0.2, y: 0.2 }, { x: 0.4, y: 0.4 },
+                        { x: 0.6, y: 0.6 }, { x: 0.8, y: 0.8 }, { x: 1, y: 1 }
+                    ],
+                    borderColor: '#6f87aa',
+                    borderDash: [6, 4],
+                    pointRadius: 0,
+                    type: 'line',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#c8d6e8' } },
+                    tooltip: { callbacks: { label: (ctx) => `Pred: ${ctx.parsed.x}, Actual: ${ctx.parsed.y}` } }
+                },
+                scales: {
+                    x: { min: 0, max: 1, ticks: { color: '#7c91b0' }, grid: { color: '#1f2a3f' },
+                    title: { display: true, text: 'Mean Predicted Probability', color: '#7c91b0' } },
+                    y: { min: 0, max: 1, ticks: { color: '#7c91b0' }, grid: { color: '#1f2a3f' },
+                    title: { display: true, text: 'Fraction of Positives', color: '#7c91b0' } }
+                }
+            }
+        });
+
+        // 3.9 Confidence vs Accuracy
+        new Chart(document.getElementById('chartConfidence'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Severity 1',
+                    data: [
+                        { x: 0.75, y: 0.78 }, { x: 0.82, y: 0.80 }, { x: 0.88, y: 0.85 }
+                    ],
+                    backgroundColor: '#3b9eff',
+                    pointRadius: 5,
+                }, {
+                    label: 'Severity 3',
+                    data: [
+                        { x: 0.62, y: 0.58 }, { x: 0.70, y: 0.65 }, { x: 0.78, y: 0.72 }
+                    ],
+                    backgroundColor: '#f59e0b',
+                    pointRadius: 5,
+                }, {
+                    label: 'Severity 5',
+                    data: [
+                        { x: 0.48, y: 0.40 }, { x: 0.55, y: 0.46 }, { x: 0.60, y: 0.52 }
+                    ],
+                    backgroundColor: '#ef4444',
+                    pointRadius: 5,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#c8d6e8' } } },
+                scales: {
+                    x: { min: 0.3, max: 1, ticks: { color: '#7c91b0' }, grid: { color: '#1f2a3f' },
+                    title: { display: true, text: 'Confidence', color: '#7c91b0' } },
+                    y: { min: 0.3, max: 1, ticks: { color: '#7c91b0' }, grid: { color: '#1f2a3f' },
+                    title: { display: true, text: 'Accuracy', color: '#7c91b0' } }
+                }
+            }
+        });
+
+        // ═══════════════════════════════════════════════════════════
+        //  4. RENDER HEATMAP
+        // ═══════════════════════════════════════════════════════════
+        function renderHeatmap() {
+            const container = document.getElementById('heatmapContainer');
+            let html = `<div class="header"></div>`;
+            heatmapSeverities.forEach(s => { html += `<div class="header">${s}</div>`; });
+
+            heatmapDepts.forEach((dept, i) => {
+                html += `<div class="row-label">${dept}</div>`;
+                heatmapData[i].forEach(cls => {
+                    const label = cls === 'high' ? '3–4' : cls === 'med' ? '1.5–2.9' : '0–1.4';
+                    html += `<div class="cell ${cls}">${label}</div>`;
+                });
+            });
+            container.innerHTML = html;
+        }
+        renderHeatmap();
+
+        // ═══════════════════════════════════════════════════════════
+        //  5. RENDER KG MOTIFS
+        // ═══════════════════════════════════════════════════════════
+        function renderMotifs() {
+            const container = document.getElementById('kgMotifContainer');
+            let html = '';
+            motifs.forEach(m => {
+                const controlHtml = m.control ?
+                    `<span class="kg-node kg-control"><i class="fas fa-check-circle"></i> ${m.control}</span>` :
+                    `<span class="kg-node kg-missing"><i class="fas fa-circle-xmark"></i> MISSING</span>`;
+                html += `
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;background:#0f1724;padding:12px 16px;border-radius:12px;border-left:3px solid ${m.missing ? '#b91c1c' : '#2a8bf2'};">
+                        <span class="kg-node kg-task"><i class="fas fa-clipboard-list"></i> ${m.task}</span>
+                        <span class="kg-arrow"><i class="fas fa-arrow-right"></i></span>
+                        <span class="kg-node kg-hazard"><i class="fas fa-triangle-exclamation"></i> ${m.hazard}</span>
+                        <span class="kg-arrow"><i class="fas fa-arrow-right"></i></span>
+                        ${controlHtml}
+                        ${m.missing ? '<span style="margin-left:auto;font-size:12px;color:#f87171;"><i class="fas fa-circle-exclamation"></i> Action required</span>' : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        renderMotifs();
+
+        // ═══════════════════════════════════════════════════════════
+        //  6. RENDER MISSING CONTROLS
+        // ═══════════════════════════════════════════════════════════
+        function renderMissingControls() {
+            const container = document.getElementById('missingControlsContainer');
+            let html = `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-weight:600;color:#7c91b0;padding:0 4px 8px;">
+                <span>Hazard</span><span>Department</span><span>Incidents</span>
+            </div>`;
+            missingControls.forEach(m => {
+                html += `
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:10px 4px;border-bottom:1px solid #1f2a3f;align-items:center;">
+                        <span style="color:#fca5a5;"><i class="fas fa-triangle-exclamation"></i> ${m.hazard}</span>
+                        <span style="color:#c8d6e8;">${m.dept}</span>
+                        <span style="color:#f87171;font-weight:600;">${m.count}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        renderMissingControls();
+
+        // ═══════════════════════════════════════════════════════════
+        //  7. RENDER MEMO
+        // ═══════════════════════════════════════════════════════════
+        function renderMemo() {
+            const container = document.getElementById('memoContainer');
+            let html = '';
+            memoData.forEach(m => {
+                html += `
+                    <div class="memo-box">
+                        <h4><span class="risk-band ${m.bandClass}">${m.band}</span> ${m.title}</h4>
+                        <p>${m.desc}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        renderMemo();
+
+        // ═══════════════════════════════════════════════════════════
+        //  8. RENDER CHECKLIST
+        // ═══════════════════════════════════════════════════════════
+        function renderChecklist() {
+            const container = document.getElementById('checklistContainer');
+            let html = '';
+            checklistItems.forEach(item => {
+                html += `
+                    <div class="checklist-item">
+                        <i class="fas fa-triangle-exclamation" style="color:#fca5a5;font-size:18px;"></i>
+                        <span class="hazard">${item.hazard}</span>
+                        <span class="controls"><i class="fas fa-shield-halved"></i> ${item.controls}</span>
+                        <span class="tag">${item.dept}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        renderChecklist();
+
+        // ═══════════════════════════════════════════════════════════
+        //  9. RESIZE OBSERVER
+        // ═══════════════════════════════════════════════════════════
+        const ro = new ResizeObserver(() => {
+            window.dispatchEvent(new Event('resize'));
+        });
+        document.querySelectorAll('.chart-wrapper canvas').forEach(el => {
+            ro.observe(el.parentElement);
+        });
+    </script>
+
+</body>
+</html>
