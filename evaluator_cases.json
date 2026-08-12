@@ -1,0 +1,2050 @@
+[
+  {
+    "id": 0,
+    "description": "Concrete block dropped from a forklift mast. Struck worker's shoulder causing fracture.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9756186519706638,
+    "probabilities": [
+      0.0010621236462828,
+      0.0033368577647305,
+      0.0143010589271367,
+      0.9756186519706638,
+      0.0056813076911858
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 1,
+    "description": "At 2:20 p.m. on April 20, 2017, an employee was operating a mechanical power press. As he was sending parts through the press, which was set to run at single-stroke, the machine switched to continuous mode. The employee was unaware of the frequency change, and amputated two fingers on his right hand while removing a part. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.9572294485913164,
+    "probabilities": [
+      0.0078377013765963,
+      0.0196927703416424,
+      0.005752991158614,
+      0.0094870885318307,
+      0.9572294485913164
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 2,
+    "description": "At 2:15 p.m. on April 24, 2017, and employee was feeding paper sheets containing strips of bacon into a paper interlever machine.  The employee placed his hand under an inadequate machine guard.  The employee's hand was caught and received crushing injuries to right thumb, index, middle, and ring fingers. Index finger damage was extensive enough to require surgical amputation at first knuckle. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8689595201646253,
+    "probabilities": [
+      0.0427993869248802,
+      0.0216315612311089,
+      0.0293713539623898,
+      0.0372381777169957,
+      0.8689595201646253
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 3,
+    "description": "Electrical fire in battery charging area. Worker suffered burns to face and forearms.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.8323287425472047,
+    "probabilities": [
+      0.0635370378819698,
+      0.0053788656018049,
+      0.0757837419395848,
+      0.8323287425472047,
+      0.0229716120294356
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 4,
+    "description": "Worker touched high-voltage terminal. Severe burns and cardiac issues.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9214942500066576,
+    "probabilities": [
+      0.0075749103938065,
+      0.0262262785980268,
+      0.0377669353167848,
+      0.9214942500066576,
+      0.0069376256847239
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 5,
+    "description": "Worker felt a static shock from a metal ladder; he jerked and bumped his head against a beam, minor bump.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.7827564544836029,
+    "probabilities": [
+      0.1327562463693658,
+      0.7827564544836029,
+      0.0321832608098519,
+      0.0375771501420221,
+      0.0147268881951572
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 6,
+    "description": "At 1:45 p.m. on May 30, 2017, an employee was operating the industrial magnetic based drill.  The employee's safety vest vest was caught-in the drill mechanism. The employee became tangled, choked and he was killed. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.9839784852877076,
+    "probabilities": [
+      0.0064703661552462,
+      0.0039721850902401,
+      0.0010822498394899,
+      0.0044967136273161,
+      0.9839784852877076
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 7,
+    "description": "At 4:45 p.m. on April 25, 2017, Employee #1 was assisting with roofing activity. Work was being performed during extreme heat, which the employee complained of not feeling well. Employee #1 was hospitalized for heat exhaustion. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.95042150582778,
+    "probabilities": [
+      0.008074745029247,
+      0.0107471938463094,
+      0.0228539440196207,
+      0.0079026112770426,
+      0.95042150582778
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 8,
+    "description": "A box (10 kg) fell from the second shelf and struck the worker's forearm, causing a large bruise and minor swelling.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8826030542677603,
+    "probabilities": [
+      0.0298820550855581,
+      0.0560663805918633,
+      0.8826030542677603,
+      0.0211416026766477,
+      0.0103069073781702
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 9,
+    "description": "The employee, when performing the adjustment / tightening operation of the cutter blade with which he worked, was neglected, the key to slip, causing the blade of the equipment to hit him, causing a blunt cut on his right forearm.",
+    "actual_severity": 2,
+    "predicted_severity": 1,
+    "confidence": 0.6171534082079485,
+    "probabilities": [
+      0.6171534082079485,
+      0.3659902735330826,
+      0.0009307499769329,
+      0.0106279017175842,
+      0.0052976665644516
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 10,
+    "description": "At 9:30 a.m. on April 17, 2017, an employee was attempting to roll a coil of aluminum. The aluminum coil, which weighed 500 pounds, fell onto the operator's work table and then onto the floor. The employee's three fingertips of the right hand were amputated. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8466476756324556,
+    "probabilities": [
+      0.0392709144697595,
+      0.0513688024274697,
+      0.0400515456545133,
+      0.0226610618158019,
+      0.8466476756324556
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 11,
+    "description": "The operator was willing to manually displace the zinc sheet adhered to the aluminum cathode. At the moment when the blade was detached, the blade was released from the cathode, bending and grazing the collaborator's right hand, producing 2 small cuts at the knuckles of the fingers, the worker made use of his gloves. leather. The worker is transferred to the medical unit for first aid.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.9839672434451996,
+    "probabilities": [
+      0.9839672434451996,
+      0.0119974723626489,
+      0.0014266468318069,
+      0.0007502040593297,
+      0.0018584333010147
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 12,
+    "description": "A 4 kg rock fell from a truck and hit the worker's foot; bruised instep.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8530581973615473,
+    "probabilities": [
+      0.010435628007774,
+      0.0738533563471393,
+      0.8530581973615473,
+      0.0564416979533286,
+      0.0062111203302107
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 13,
+    "description": "Being approximately 14:25 h when supervising the line clamping of the POM D071 Roy Canario returning to the thickener D1304 hits his nose with the metal chute out of operation.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.4611275346416529,
+    "probabilities": [
+      0.4611275346416529,
+      0.3127191111394493,
+      0.0292657011893202,
+      0.1591130140456247,
+      0.0377746389839528
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 14,
+    "description": "A splash of solvent caused skin redness; treated with cream, no further issue.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8777418020411031,
+    "probabilities": [
+      0.0290034361688869,
+      0.068242023828273,
+      0.8777418020411031,
+      0.0162269646486944,
+      0.0087857733130423
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 15,
+    "description": "A splash of mild detergent solution caused skin redness on the forearm; treated with lotion, no further issue.",
+    "actual_severity": 3,
+    "predicted_severity": 2,
+    "confidence": 0.4579552865406575,
+    "probabilities": [
+      0.1142488371224926,
+      0.4579552865406575,
+      0.3757765786067248,
+      0.0323906745519376,
+      0.0196286231781872
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 16,
+    "description": "Hydrochloric acid line burst under pressure. Worker drenched in acid suffering severe chemical burns to back and legs (25% body area).",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.8877166754185652,
+    "probabilities": [
+      0.0398317818435832,
+      0.0488531462961723,
+      0.0072777186353634,
+      0.8877166754185652,
+      0.0163206778063158
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 17,
+    "description": "Being at 11:00 a.m. approximately the mechanic was removing the last bolt of the 6 \"nipple in the pump 4115 (lime feeder), reactive area, the mechanic is positioned slightly flexing the legs and performs upward force with both hands, in that moment feels a pain and a spume in the right thigh. The mechanic is evacuated with the help of his colleagues to the medical post.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.4422593928577702,
+    "probabilities": [
+      0.4422593928577702,
+      0.0793910990368268,
+      0.0638030508637314,
+      0.3286154589817286,
+      0.0859309982599427
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 18,
+    "description": "Worker's fingers caught between two rollers; swollen and bruised, no fracture.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.896204112741363,
+    "probabilities": [
+      0.0123352701876343,
+      0.0562869484072763,
+      0.896204112741363,
+      0.0252204710744529,
+      0.0099531975892732
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 19,
+    "description": "Worker drilled into concealed live 480V cable. Severe electrical shock with exit wound on foot causing burns and neurological damage.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9104953076552016,
+    "probabilities": [
+      0.0154605937621736,
+      0.0305415238651161,
+      0.0267695120611869,
+      0.9104953076552016,
+      0.0167330626563216
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 20,
+    "description": "In circumstances that the assistant of mine was arranging to advance the hose of flexible nylon of 1 \"of diameter, to proceed with the watered of shot fired, positioning itself under a zone with the support deteriorated by the last blasting, moment in which it gives off a block of rock (25cmx10cmx5cm; 3.5 Kg) of the roof of the work of a height of 5.2 meters which when falling hits by rebound in the left leg of the collaborator causing the described injury.",
+    "actual_severity": 4,
+    "predicted_severity": 1,
+    "confidence": 0.7491929605647714,
+    "probabilities": [
+      0.7491929605647714,
+      0.0475756474825772,
+      0.0028927900261188,
+      0.0041077635550707,
+      0.1962308383714618
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 21,
+    "description": "The convoy of the locomotive 15 operated by Mr. Tito is located in hopper OP2 positioning the 1st car under the hopper, the assistant does not observe anything out of the ordinary (dry load there is no presence of water) and initiates the chute, for this, the hydraulic module of the hopper is switched on and with the controls it slightly moves the hopper handle and an untimely flow of water and mud splashes the operator generating the described injury, in addition the collaborator was 7 meters from the line of fire",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.982767688221982,
+    "probabilities": [
+      0.982767688221982,
+      0.0007485632311742,
+      0.0015030702358946,
+      0.0082460991705062,
+      0.006734579140443
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 22,
+    "description": "Auxiliary and Geologist traveled to the field to evaluate geological points following the GPS near some drainage. Following the state highway that gives access to Aripuan\u00e3 area, stopped and got out of the vehicle to see the point identified in the GPS, Ademir, distancing himself about five meters from the vehicle, accompanied by the geologist Mario, was surprised by two bites of blows on his neck. Quickly he hurried back to the vehicle, moving away from the place. The clerk was wearing a girdle and goggles, he still was not wearing gloves, as he would not enter the forest area. There was no allergic reaction.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.9630164930106272,
+    "probabilities": [
+      0.9630164930106272,
+      9.262500411254364e-05,
+      0.0305556148431382,
+      0.0033240753878741,
+      0.0030111917542476
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 23,
+    "description": "During the process of washing the material (Becker), the tip of the material was broken which caused a cut of the 5th finger of the right hand",
+    "actual_severity": 1,
+    "predicted_severity": 2,
+    "confidence": 0.5598025260206657,
+    "probabilities": [
+      0.2218854894834289,
+      0.5598025260206657,
+      0.0969430985711883,
+      0.09925203733707,
+      0.0221168485876469
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 24,
+    "description": "A small hammer (1 kg) fell from a scaffold and hit the worker's shoulder; resulted in a contusion and minor pain.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.7215191843369835,
+    "probabilities": [
+      0.0478331041790327,
+      0.1099173750464488,
+      0.7215191843369835,
+      0.0962667357160947,
+      0.0244636007214401
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 25,
+    "description": "Worker fell from an aerial lift at 10 m after controls malfunctioned. Multiple spinal and pelvic fractures.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9343622590284092,
+    "probabilities": [
+      0.009720279389191,
+      0.0228582469742823,
+      0.0256154811691915,
+      0.9343622590284092,
+      0.0074437334389258
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 26,
+    "description": "On April 18, 2017, an employee was standing in front of the oil storage tanker.  The employee was struck by the oil storage tanker cover/lid when the tanker exploded and was killed. Two other employees were hospitalized for unspecified injuries. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.88481500647167,
+    "probabilities": [
+      0.0120551891407612,
+      0.0405505078796803,
+      0.0312854737942913,
+      0.0312938227135969,
+      0.88481500647167
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 27,
+    "description": "Once the ore loading in the LT-30 locomotive was completed; the penultimate car derails (7th car), by the presence of fragment of rock in the railway line, (weight of the car with mineral 8 tons), and to get it back on track the mining car, the victim makes use of a metal tube (length 1.20 meters and 4 \"diameter) to maneuver and reposition the mining car; at that moment the metallic tube loses stability and imprisons the victim's hand against the strut of the mining car. The collaborator at the time of the event towards the use of his leather gloves.",
+    "actual_severity": 3,
+    "predicted_severity": 1,
+    "confidence": 0.9956318655145838,
+    "probabilities": [
+      0.9956318655145838,
+      0.0031038956450528,
+      0.0006913728669228,
+      9.252165540750572e-05,
+      0.0004803443180329
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 28,
+    "description": "Team of the VMS Project performed soil collection on the Xix\u00e1s target with 3 members. When the teams were moving from one collection point to another, Mr. Fabio was ahead of the team, stinging behind Robson and Manoel da Silva. near the collection point were surprised by a swarm of bees that was inside a I play near the ground, with no visibility in the woods and no hissing noise. Fabio passed by the stump, but Robson and Manoel da Silva were attacked by the bees. Robson had a sting in his left arm over his uniform and Manoel da Silva had a prick in his lip as his screen ripped as he tangled in the branches during the escape.",
+    "actual_severity": 1,
+    "predicted_severity": 2,
+    "confidence": 0.7364219407502829,
+    "probabilities": [
+      0.2227604409436853,
+      0.7364219407502829,
+      3.2366261431355407e-05,
+      0.0054599467491822,
+      0.0353253052954183
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 29,
+    "description": "A light box (2 kg) fell from a shelf and hit the worker's shoulder; minor contusion.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8824626286632418,
+    "probabilities": [
+      0.0763612950464808,
+      0.8824626286632418,
+      0.0188708187944569,
+      0.0171578363779859,
+      0.0051474211178346
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 30,
+    "description": "At 2:45 p.m. on April 25, 2017, an employee was installing a conveyor motor cover while the conveyor was not locked out.  The employee 's right hand was caught in by a chain and sprocket and crushed four fingers on the right hand.The employee had the first digit of the index finger amputated later at the hospital. The employee as hospitalized. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.881996170289716,
+    "probabilities": [
+      0.0624556431523467,
+      0.034076988509983,
+      0.0078345581936386,
+      0.0136366398543155,
+      0.881996170289716
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 31,
+    "description": "At 8:00 a.m. on April 19, 2017, an employee was working with two coworkers who were tearing off shingles from a two story residential home.  The employee lost his balance when tearing off the roof shingles and fell approximately 25 feet to the ground in an alleyway.  The employee suffered massive internal and head injuries and was killed. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8865810738894693,
+    "probabilities": [
+      0.0248996268399689,
+      0.0283884210396299,
+      0.0358393010274003,
+      0.0242915772035314,
+      0.8865810738894693
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 32,
+    "description": "At 2:00 p.m. on June 30, 2017, an employee was installing a self-adhering membrane to a roof with a slope of 1.25 feet to 12 feet (vertical to horizontal). As the employee installed the last section of the membranehe determined that it was too wide. He folded over the membrane cap sheet lengthwise and began ripping it with a knife, all while walking backwards. Once the employee reached the edge of the roof, he stood up and inadvertently stepped backwards and fell of the roof. The employee sustained severe head trauma, a collapsed lung, as well as fractures to one of his clavicles and ribs. The employee was taken to a nearby medical facility where he was hospitalized and received treatment. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.960636365399843,
+    "probabilities": [
+      0.0354154613420735,
+      0.0013822755012058,
+      0.0008945616386805,
+      0.001671336118197,
+      0.960636365399843
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 33,
+    "description": "A small metal bracket (1 kg) fell from a shelf and hit the worker's hard hat; mild neck strain.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8862063790713272,
+    "probabilities": [
+      0.0732545365050448,
+      0.8862063790713272,
+      0.0190639707706934,
+      0.016694284724369,
+      0.0047808289285655
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 34,
+    "description": "A pallet jack bumped the worker's calf; caused a small bruise and minor tenderness.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8210982371756752,
+    "probabilities": [
+      0.119037258535539,
+      0.8210982371756752,
+      0.0368657828033442,
+      0.01570370623555,
+      0.0072950152498914
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 35,
+    "description": "Pallet storage fire. Worker suffered burns to arms.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.823075763380376,
+    "probabilities": [
+      0.0333558656641948,
+      0.0057789397556217,
+      0.1254822935185824,
+      0.823075763380376,
+      0.012307137681225
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 36,
+    "description": "At 12:00 p.m. on April 19, 2017, an employee was assisting a coworker to troubleshoot a malfunction of an Amada CNC machine (model number: S-10, serial number: 131) that resulted in a coolant leak.  After the coworker removed two panels, normally affixed on the front and side of the machined, and determined that metal chips were blocking the coolant drainage, the employee approached the machine and began helping his coworker remove the metal chips. Much of the metal chips accumulated behind the guard of the machine. As the employee used a magnet and was pulling chips from the side panel access, the CNC turret indexed forward and struck his right hand, pinning it against the inside of the machine's frame.  His hand was caught in a sheer point, resulting in its degloving.  The incident investigation revealed that the machine was not locked out during the maintenance task and steps to protect against injury during the troubleshooting portion of the inspection were not implemented. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.9601017571358536,
+    "probabilities": [
+      0.0398218235652174,
+      4.102196310816208e-05,
+      2.1292204984480938e-07,
+      3.518441377097872e-05,
+      0.9601017571358536
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 37,
+    "description": "Worker's finger was pinched between two plastic crates; minor swelling and redness.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.842493350612387,
+    "probabilities": [
+      0.0833775662936565,
+      0.842493350612387,
+      0.0443130047937208,
+      0.0209822651775063,
+      0.0088338131227294
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 38,
+    "description": "Contact with 6.6kV trailing cable. Severe burns to hands and chest.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9050059079658674,
+    "probabilities": [
+      0.0148711439510404,
+      0.0266593763552247,
+      0.0448779342748512,
+      0.9050059079658674,
+      0.0085856374530161
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 39,
+    "description": "At 7:00 a.m. on April 17, 2017, an employee had entered the tunnel kiln to fix the line switch. The employee became trapped in the tunnel kiln after completing the repairs and an automated process took control, closing the kiln door while the employee was still in the tunnel.  The employee was killed from extreme exposure to thermal energy within the kiln. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8910547026299739,
+    "probabilities": [
+      0.0637858401597972,
+      0.0129099319315183,
+      0.0223070776099147,
+      0.0099424476687957,
+      0.8910547026299739
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 40,
+    "description": "Worker stepped off a low dock (0.8 m) and twisted his knee; diagnosed as a mild sprain.",
+    "actual_severity": 3,
+    "predicted_severity": 2,
+    "confidence": 0.8125195481281148,
+    "probabilities": [
+      0.0868775200230517,
+      0.8125195481281148,
+      0.0600380731228215,
+      0.0253664441698182,
+      0.0151984145561939
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 41,
+    "description": "Worker felt a mild static shock and dropped a box on his foot; bruised toes.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.9074014914800244,
+    "probabilities": [
+      0.0163255238031515,
+      0.0513444603384731,
+      0.9074014914800244,
+      0.0179266239655579,
+      0.0070019004127928
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 42,
+    "description": "In the volvo workshop at the time of cutting steel plate (thickness 1 in), for the installation of the MT-32 scoop lip, with Oxicorte equipment, the injured feels a discomfort in both eyes. At the time of the accident the collaborator made use of his full Epp, but the soldering iron lens did not make full adjustment for the presence of the respirator.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.707477817453473,
+    "probabilities": [
+      0.707477817453473,
+      0.0936519518522991,
+      0.0893882812487447,
+      0.0633915318626515,
+      0.0460904175828315
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 43,
+    "description": "In tower N \u00b0 6 of the old 50 KV LT (disabled and de-energized and 90% disassembled) located in the city of Pasco, the cutting of the last profiles of the base of the tower previously disassembled was carried out, using oxyfuel equipment, at 11:45 a.m., the safety supervisor of Proingcom and the foreman, who were in the external part of the fenced area supervising the activity, indicate the paralysis of activities and evacuation to the refuge due to the orange alert indicated on the detector of storms. During the evacuation of the last 02 employees who were inside the fenced area, a loud sound was heard, provoking a scare, which caused the staff to throw themselves to the floor within the area, then proceeded to leave the work area by their own means through the staircase. Apparently the loud sound would correspond to an electrical discharge in the cable guard that passes over the old towers.",
+    "actual_severity": 1,
+    "predicted_severity": 4,
+    "confidence": 0.6821548616680266,
+    "probabilities": [
+      0.2001276956854524,
+      0.0002610290888496,
+      0.0030766665106181,
+      0.6821548616680266,
+      0.114379747047053
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 44,
+    "description": "At 1:00 p.m. on April 24, 2017, Employee #1 was working from a scaffold. The employee tried to move from one board of the scaffold to another board. The board slipped, and Employee #1 fell 12 feet to the ground below. The employee sustained scrapes and bruises and was hospitalized for his injuries. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.9634825334393904,
+    "probabilities": [
+      0.0194948395646451,
+      0.0039626856179645,
+      0.0043270713977119,
+      0.008732869980288,
+      0.9634825334393904
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 45,
+    "description": "Worker pinned by forklift. Pelvic fracture.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.7690046947967961,
+    "probabilities": [
+      0.0059320855828282,
+      0.0001122524129573,
+      0.2171003431309784,
+      0.7690046947967961,
+      0.0078506240764398
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 46,
+    "description": "Worker received a mild shock from a 110V line; he jerked and bumped his head.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8824506002695099,
+    "probabilities": [
+      0.0255415807961571,
+      0.0634954554398177,
+      0.8824506002695099,
+      0.0184842763505076,
+      0.0100280871440074
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 47,
+    "description": "At 2:35 p.m. on May 9, 2017, an employee was driving an Isuzu box truck west on Highway 6 after making a delivery.  The employee was navigating a left hand curve when the truck crossed the centerline and struck an eastbound chip truck.  The initial report did not provide specifics or contain a description of injuries. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8958653323904773,
+    "probabilities": [
+      0.0205610621000166,
+      0.0307509968569753,
+      0.006282132421836,
+      0.0465404762306945,
+      0.8958653323904773
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 48,
+    "description": "During the transit of the fuel tanker of level 3530 at level 2925 by the north ramp; When passing through level 3140 the operator feels that the right rear tire skids and when the operator performs a defensive maneuver the truck hits the left gable causing the injury described. At the time of the accident, the pilot and co-pilot were wearing a safety belt, their safety glasses and helmet.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.5157043554799393,
+    "probabilities": [
+      0.5157043554799393,
+      0.4591409054919764,
+      0.003674919859869,
+      0.0116500758009679,
+      0.0098297433672471
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 49,
+    "description": "A small detonation sent a pebble into the worker's leg; minor bruise and scratch.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8838450508833435,
+    "probabilities": [
+      0.0594743152814946,
+      0.8838450508833435,
+      0.0340014553883796,
+      0.0157694502267197,
+      0.0069097282200622
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 50,
+    "description": "Being the 01:30 hrs, After the cathode goes through the pre estriping, the sheets are detached and bend to the cathode of its position, the operator with the assistant lift the cathode by the head to position it in the tranfer at that moment the detached sheet exerts pressure on the cathode hitting the palm of the left hand of the operator with the head and the transfe, activity is paralyzed and the collaborator is referred to the medical post by the head of the guard.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.7859215777424583,
+    "probabilities": [
+      0.7859215777424583,
+      0.0820252948167659,
+      0.0656689234919307,
+      0.0250295885309411,
+      0.0413546154179037
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 51,
+    "description": "A 5 kg bag of cement fell from a 3 m height, striking the worker's hard hat; he suffered a mild concussion and neck strain.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8906853922835276,
+    "probabilities": [
+      0.0315343528816729,
+      0.0515623283638679,
+      0.8906853922835276,
+      0.0174031243807285,
+      0.0088148020902029
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 52,
+    "description": "Worker slipped on a wet floor and fell from a 0.4 m height; bruised his hip and scraped his hand.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8223608496166573,
+    "probabilities": [
+      0.0955097289824756,
+      0.8223608496166573,
+      0.032591831134847,
+      0.0298627553199089,
+      0.0196748349461109
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 53,
+    "description": "The accident occurred at the time an employee of the partner company SF carried out unloading operation of bladder bags. By cutting the bag for charging of the boom into the silo truck's delivery mouth, the inner plastic bag surrounding the contents abruptly dropped and a large amount of material fell onto the cone (funnel). The cone fell over and the injured man stood with his leg pressed between him and the body guard of the scaffold. There was external medical attention and it was verified that there was no fracture",
+    "actual_severity": 3,
+    "predicted_severity": 4,
+    "confidence": 0.9801284187497328,
+    "probabilities": [
+      0.0058389003655722,
+      3.045737946685167e-05,
+      0.0035095519613349,
+      0.9801284187497328,
+      0.0104926715438932
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 54,
+    "description": "Worker touched a 24V wire and felt a tingle; he pulled away, scraping his hand.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.798998264392066,
+    "probabilities": [
+      0.1383414017121297,
+      0.798998264392066,
+      0.0315924260949735,
+      0.0182969541163863,
+      0.0127709536844441
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 55,
+    "description": "A splash of concrete mix got onto the worker's hand; washed off, mild irritation.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.833232314072396,
+    "probabilities": [
+      0.1124548919385177,
+      0.833232314072396,
+      0.0313097673669997,
+      0.014958790869518,
+      0.0080442357525683
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 56,
+    "description": "In circumstances, the drilling assistants proceeded to assemble the inner tube to the barel; the injured person retracts the inner tube (head) to throw it manually towards the top of the catheter (inclination - 3 \u00b0) to continue with the perforation, in that moment the glove of the left hand is hooked in the speart point pushing his left hand until the edge of the box of the barel, originating the injury. At the time of the accident the injured employee used his rubber gloves and the work area was well lit.",
+    "actual_severity": 3,
+    "predicted_severity": 1,
+    "confidence": 0.7512076056689001,
+    "probabilities": [
+      0.7512076056689001,
+      0.2487670291391349,
+      3.58271739910418e-07,
+      9.934112878057477e-08,
+      2.490757909626452e-05
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 57,
+    "description": "When performing cleaning activity of the area near the 042-TC-06 - Grinding the employee was handling a block of triangular shaped rock measuring (b = 53cm x h = 42cm x e = 12cm). During the movement, he lost his balance by falling with the rock on the thumb of his left hand, injuring him.",
+    "actual_severity": 3,
+    "predicted_severity": 1,
+    "confidence": 0.7501645981256079,
+    "probabilities": [
+      0.7501645981256079,
+      0.0990643939408884,
+      0.0646939819831598,
+      0.0302669140440775,
+      0.0558101119062662
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 58,
+    "description": "At 12:00 p.m. on April 20, 2017, an employee was working at a golf course. After driving a golf cart to the facility mailbox to retrieve the mail and returning to the office parking lot, the employee pulled forward into a parking space in anticipation of backing into a golf cart designated spot. During backing of the golf cart, the employee placed his left foot outside of the vehicle, which became caught between a cement curb and the golf cart.  The employee sustained multiple laceration to his left heel. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.9493492733384054,
+    "probabilities": [
+      0.0452854093636418,
+      0.0020943113785464,
+      0.0008489904731746,
+      0.0024220154462317,
+      0.9493492733384054
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 59,
+    "description": "Worker received a slight shock and jerked, hitting his hand on a sharp edge; small laceration.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8820836238029465,
+    "probabilities": [
+      0.0285552197275198,
+      0.0626391601502111,
+      0.8820836238029465,
+      0.0172736160970549,
+      0.0094483802222675
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 60,
+    "description": "At 12:00 p.m. on April 21, 2017, an employee was using a tube cutter to cut a piece of silicone tubing. As the employee measured the tubing, she inadvertently depressed the machine's foot pedal, activating the machine. Her right index finger was contacted by the blade, amputating her fingertip. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8175357895805737,
+    "probabilities": [
+      0.076795680130549,
+      0.0377884987042937,
+      0.0226868689144878,
+      0.0451931626700955,
+      0.8175357895805737
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 61,
+    "description": "Sodium hydroxide spilled onto worker's feet due to drum rupture. Chemical burns requiring skin grafts.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.6997407727700452,
+    "probabilities": [
+      0.0043497723878403,
+      0.2884841056885585,
+      0.0012607692732806,
+      0.6997407727700452,
+      0.0061645798802755
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 62,
+    "description": "Worker stepped off a low platform (0.6 m); twisted his ankle, mild sprain.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.9018798323893932,
+    "probabilities": [
+      0.0206195366298382,
+      0.0553464890928697,
+      0.9018798323893932,
+      0.0157354556141625,
+      0.0064186862737361
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 63,
+    "description": "At 1:30 p.m. on May 7, 2017, an employee was cutting the top off of a dead tree so that it could be removed.  The employee fell from the tree as he moved down the tree to make a new cut and was killed when they struck the ground. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8891231977741041,
+    "probabilities": [
+      0.0526648429611933,
+      0.0333956979359307,
+      0.0084367652803474,
+      0.0163794960484245,
+      0.8891231977741041
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 64,
+    "description": "During the maintenance of the access, at the moment the assistant places the mini split set in the adapter, the clamp - which was locked - returns to its initial position hitting the collaborator's hand causing the described injury. At the time of the accident the team was in a sustained area, the arm of the jumbo was at a height of 0.80m from the floor and the employee was wearing rubber gloves.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.8804877113556109,
+    "probabilities": [
+      0.8804877113556109,
+      0.1191616178267036,
+      1.8799788824625077e-05,
+      2.814782318328028e-05,
+      0.0003037232056774
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 65,
+    "description": "Worker fell from roof edge at 6 m while installing sheeting. Multiple fractures to pelvis and lumbar spine.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9162551338867866,
+    "probabilities": [
+      0.0120467634268886,
+      0.029447383234272,
+      0.0223553852895641,
+      0.9162551338867866,
+      0.0198953341624885
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 66,
+    "description": "By participating in the general DDS held in the outside area of \u200b\u200bthe central locker room the employee was bitten by a bee.",
+    "actual_severity": 1,
+    "predicted_severity": 2,
+    "confidence": 0.8073797211741033,
+    "probabilities": [
+      0.098086195778619,
+      0.8073797211741033,
+      0.0194258878795788,
+      0.0588601937766866,
+      0.016248001391012
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 67,
+    "description": "During explosive loading with an anfoloader, a 9 kg rock fragment fell from the crown, striking the helper's back while he was in the basket at 2.2 m height. Subsequently, a 1,500 kg block detached and impacted the equipment, with a fragment injuring the operator on the ground. Both suffered polycontusions and minor abrasions.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.5656164626139234,
+    "probabilities": [
+      0.3188503489357277,
+      0.0624069772161083,
+      0.5656164626139234,
+      0.0217709193962525,
+      0.0313552918379877
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 68,
+    "description": "Worker slipped on a greasy floor and fell from a 0.4 m height; bruised his hip and scraped his hand.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8263799772564059,
+    "probabilities": [
+      0.1069889205978315,
+      0.8263799772564059,
+      0.0293171538302776,
+      0.0217156029675994,
+      0.0155983453478853
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 69,
+    "description": "When making the change of support of the vertical pump of 6 \"(40357 Zinc two mechanics raised a beam in\" H \"(4\" x 2.7 m and 45 kg.) One at each end and being at the height of The injured person's knee slips from his hands causing the injury described.",
+    "actual_severity": 1,
+    "predicted_severity": 4,
+    "confidence": 0.691050504888286,
+    "probabilities": [
+      0.1703752892184528,
+      0.0876019617804537,
+      0.0233609951054578,
+      0.691050504888286,
+      0.0276112490073494
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 70,
+    "description": "Forklift tip over. Ankle fracture.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9543981281692572,
+    "probabilities": [
+      0.0004109599064558,
+      0.005025047105308,
+      0.0372906046575702,
+      0.9543981281692572,
+      0.0028752601614087
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 71,
+    "description": "A small electrical fire produced smoke; worker suffered mild respiratory irritation.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.959666585668208,
+    "probabilities": [
+      0.0195987529084428,
+      0.0074547441960878,
+      0.959666585668208,
+      0.0096248333166916,
+      0.0036550839105696
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 72,
+    "description": "Worker fell from a 6 m scaffolding. Multiple fractures and head injury.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9359227552514792,
+    "probabilities": [
+      0.0127297782690855,
+      0.030294540461254,
+      0.014294293586945,
+      0.9359227552514792,
+      0.0067586324312359
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 73,
+    "description": "Worker fell from a 3 m stepladder. Fractured wrist and ankle.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9170859580708952,
+    "probabilities": [
+      0.0077935748128497,
+      0.0284199303926091,
+      0.0395589670700431,
+      0.9170859580708952,
+      0.0071415696536029
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 74,
+    "description": "The employee was sanding a piece in the Electrolysis at the end of the operation, when the protective cap of the disk spun to the back of the left hand.",
+    "actual_severity": 1,
+    "predicted_severity": 2,
+    "confidence": 0.5591039668691627,
+    "probabilities": [
+      0.3297710136716334,
+      0.5591039668691627,
+      0.0798409084212333,
+      0.0231123731758101,
+      0.0081717378621604
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 75,
+    "description": "Mr. Jesus operator of the concrete throwing team (alpha N \u00b0 18) was shooting shotcrete in the Cx work. 001 Nv. 1710 OB1. applying 0.5 m3, he realizes that the additive did not come out in the mix, directing to lift the cover of the passage valve (54 Cm x 53 Cm of \u00bc inch of thickness approximately 15 Kg). verifying that the valve was open, release the lid and it hits to the third finger of the left hand against the base, causing the injury.",
+    "actual_severity": 3,
+    "predicted_severity": 1,
+    "confidence": 0.8491718220774299,
+    "probabilities": [
+      0.8491718220774299,
+      0.0994065235578848,
+      0.0002282827054985,
+      0.0031431377033788,
+      0.0480502339558078
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 76,
+    "description": "Worker hit by a shuttle car. Fractured pelvis and leg.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9571900222993897,
+    "probabilities": [
+      0.0120687682000636,
+      0.016362656853778,
+      0.0103777522453481,
+      0.9571900222993897,
+      0.0040008004014205
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 77,
+    "description": "Finger caught in belt. Amputation.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.8957220126057492,
+    "probabilities": [
+      0.0135725307501596,
+      0.0540766782538483,
+      0.0315067205776596,
+      0.8957220126057492,
+      0.0051220578125832
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 78,
+    "description": "At level 3490 gallery 447, after performing the manual unlocking on load, the worker prepares to cut the sacrificial mesh that was exposed after the previous turn shot, placing himself under it with a 12-inch shear, when cutting the fifth suddenly strained wire of the mesh returns to his face casion\u00e1ndole the injury described. During the activity the worker used his safety glasses.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.6699135739254425,
+    "probabilities": [
+      0.6699135739254425,
+      0.2299887524900544,
+      0.0124193411277801,
+      0.0396118828731208,
+      0.048066449583602
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 79,
+    "description": "Worker slipped on a muddy surface and fell from a 0.3 m height; bruised his palm and scraped his knee.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8147597562678114,
+    "probabilities": [
+      0.123770843989773,
+      0.8147597562678114,
+      0.0285993279571213,
+      0.0189155649233008,
+      0.0139545068619933
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 80,
+    "description": "At 8:00 a.m. on May 18, 2017, an employee was working to level the exterior wall panels of a structure. During work, the employee determined that bracing positioned on the interior of the structure needed to be adjusted. As the employee was positioned on the first floor, 11.5 feet above the concrete basement, to make the necessary adjustments, he stepped backwards into an uncovered opening. The opening was intended to be a stairwell and measured 11.9 feet by 3.6 feet. The employee fell 11.5 feet to the ground and was killed. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.9574231390735116,
+    "probabilities": [
+      0.0353009060008211,
+      0.0037239433988705,
+      0.0022377932040486,
+      0.0013142183227478,
+      0.9574231390735116
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 81,
+    "description": "At 12:30 p.m. on May 4, 2017, an employee was staging plumbing tools and materials on a roof.  The employee stepped on an unprotected/unguarded semi-translucent corrugated fiberglass sky light panel and fell 16.5 feet to the concrete slab.  The employee suffered crushing injuries to their body and head and was killed onsite. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.9345296441716544,
+    "probabilities": [
+      0.0140578399169203,
+      0.0204456691945387,
+      0.0167624196866575,
+      0.0142044270302288,
+      0.9345296441716544
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 82,
+    "description": "Worker's fingers were caught between two pallets; bruised and swollen fingertips.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.926038089476997,
+    "probabilities": [
+      0.012586068051873,
+      0.0375679138624892,
+      0.926038089476997,
+      0.01799421175995,
+      0.0058137168486906
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 83,
+    "description": "At 5:15 p.m. on May 19, 2017, an employee was on his own personal time, working on a drum that previously contained an unknown chemical. With the drum sealed, the employee initiated welding, which caused its lid to blow off. The employee was struck in the head, resulting in his death. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.946629302199038,
+    "probabilities": [
+      0.047134144052545,
+      0.0003508901759091,
+      0.0033232809652773,
+      0.0025623826072306,
+      0.946629302199038
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 84,
+    "description": "The employee used a lever to remove the sealing ring from the front tire of the wheel loader (LHD 05) when the lever came to release from the fulcrum in the ring and press the left ring finger against the loader shell causing traumatism at the tip of the said finger.",
+    "actual_severity": 2,
+    "predicted_severity": 1,
+    "confidence": 0.6931966980098967,
+    "probabilities": [
+      0.6931966980098967,
+      0.1082706241436423,
+      0.0600386962660254,
+      0.0825449246022818,
+      0.0559490569781536
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 85,
+    "description": "A pallet jack bumped the worker's shin; resulted in a large bruise and mild pain.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8840988349879302,
+    "probabilities": [
+      0.0275775437823261,
+      0.0645774264116756,
+      0.8840988349879302,
+      0.0157116514937299,
+      0.0080345433243381
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 86,
+    "description": "Employee reports that when trying to remove one of the plates from the overflow system of the Ustulador oven, the 5th finger of the right hand was pressed between the tool (wrench with extension) and the overflow flange of the Ustulador oven, located behind the performer.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.6794414883045048,
+    "probabilities": [
+      0.6794414883045048,
+      0.09252051899749,
+      0.0020547619074187,
+      0.0496955881617033,
+      0.176287642628883
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 87,
+    "description": "At 5:15 p.m. on May 11, 2017, an employee was using a power stocker lift to stock merchandise.  The employee fell from the lift and was killed. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.7599700967267617,
+    "probabilities": [
+      0.0181477072529747,
+      0.0718624155941259,
+      0.1018617270304791,
+      0.0481580533956585,
+      0.7599700967267617
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 88,
+    "description": "Heavy box (150 kg) fell from overhead storage. Struck worker on the back causing spinal compression fracture.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9213507197348256,
+    "probabilities": [
+      0.0141948566637482,
+      0.0221966606544052,
+      0.0327690977650948,
+      0.9213507197348256,
+      0.009488665181926
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 89,
+    "description": "Falling rock from roof struck worker's shoulder. Fractured clavicle.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9064435761082548,
+    "probabilities": [
+      0.0125704002305144,
+      0.0348571038526342,
+      0.0349318706218851,
+      0.9064435761082548,
+      0.0111970491867111
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 90,
+    "description": "A small detonation sent a pebble into the worker's leg; minor bruise and scratch.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8740732647293681,
+    "probabilities": [
+      0.0704394884042606,
+      0.8740732647293681,
+      0.0343548993813087,
+      0.0146536409627326,
+      0.0064787065223296
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 91,
+    "description": "A small piece of ore (2 kg) fell from a conveyor and struck the worker's arm; contusion.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8967960523073736,
+    "probabilities": [
+      0.0307168109488579,
+      0.0528389309242481,
+      0.8967960523073736,
+      0.0134104003236702,
+      0.0062378054958499
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 92,
+    "description": "The employee was working in the When a thermal shock caused a splash of zinc in his direction, the employee, despite using all the indicated PPE, was hit by small spatters that passed between the facila and the hood. small burn in the face region.",
+    "actual_severity": 1,
+    "predicted_severity": 2,
+    "confidence": 0.7455715267662881,
+    "probabilities": [
+      0.2541003883512719,
+      0.7455715267662881,
+      2.5962069846487324e-05,
+      5.553540759517769e-05,
+      0.0002465874049982
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 93,
+    "description": "A small electrical fire caused minor smoke; worker treated for mild inhalation.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.783896944121604,
+    "probabilities": [
+      0.0363275346346827,
+      0.1245482093907061,
+      0.783896944121604,
+      0.0449675357798486,
+      0.0102597760731583
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 94,
+    "description": "In moments that the worker-mechanic was the workshop of maintenance, the wire of his mining lamp is hooked with a drill hole (4.0 Kg) that was on the work table of the workshop, which fell 1.m and impacted his left foot causing a minor bruise. At the time of the accident the collaborator used his safety boots with steel toecap.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.885832153167457,
+    "probabilities": [
+      0.885832153167457,
+      0.0480888285116336,
+      0.013636966751727,
+      0.0106498297649603,
+      0.0417922218042221
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 95,
+    "description": "When performing the sleeve removal maneuver, when the hole was 600 meters deep, General da Silva pressed only one side of the locking nut of the rods, which together with the jack, holds the entire weight of the rods in the maneuver. As the locking procedure was not effective, the weight of the rods was only secured by the steel wire rope of the probe winch. At the moment that driller Pedro released the brake of the winch, the inefficacy of the locking done only in one side of the chestnut and without aid of the monkey, caused the sliding of the rods. Auxiliary was prepared for manual unlocking of the rods, holding the faucet key firmly against the probe tower as the composition shifted. As the stems slid, his hands were shifted downward, causing his left hand to strike against the base of the probe tower structure, causing cuts to the 4th and 5th Quirodactyl. employee was taken to the hospital where he went through medical care. wound was sutured with 16 stitches. same was removed for 10 days from his activities.",
+    "actual_severity": 4,
+    "predicted_severity": 1,
+    "confidence": 0.9844136574326364,
+    "probabilities": [
+      0.9844136574326364,
+      0.002647544596371,
+      0.0003622905441351,
+      0.0009751039796085,
+      0.0116014034472488
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 96,
+    "description": "The maid was handling a pipette for sample preparation for chemical analysis, while trying to place it on the three-way pear, the pipette came to break causing a superficial cut in her right hand.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.6211588849716217,
+    "probabilities": [
+      0.6211588849716217,
+      0.3178413914825109,
+      0.0165721614391837,
+      0.0281195802330634,
+      0.0163079818736201
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 97,
+    "description": "Shock from 220V outlet. Burn to hand.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.908865428849179,
+    "probabilities": [
+      0.0148728870457164,
+      0.0250567800341074,
+      0.0427928373886903,
+      0.908865428849179,
+      0.0084120666823067
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 98,
+    "description": "A small grease fire produced a puff of smoke; worker coughed briefly, no burns, treated with fresh air.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.821503823325195,
+    "probabilities": [
+      0.1095860058590465,
+      0.821503823325195,
+      0.0335897317389518,
+      0.0261437051830779,
+      0.0091767338937287
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 99,
+    "description": "At 1:15 p.m. on May 24, 2017, an employee was nailing a second floor window into place.  The employee was on the outside of the structure standing on a 32 feet extension ladder when reportedly he lost his balance and fell.  The ladder was reportedly placed inside a 30 foot long construction dumpster among the trash and debris which possibly caused the ladder to slip.  The employee was killed by impact when hitting the ground. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.8953467046914804,
+    "probabilities": [
+      0.0765630314305484,
+      0.0028471841856432,
+      0.0122165870436513,
+      0.0130264926486764,
+      0.8953467046914804
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 100,
+    "description": "Worker stepped off a 0.8 m platform, twisting his knee; mild sprain.",
+    "actual_severity": 3,
+    "predicted_severity": 2,
+    "confidence": 0.8738095457144476,
+    "probabilities": [
+      0.0625868569174531,
+      0.8738095457144476,
+      0.0366466367672015,
+      0.0191123302589781,
+      0.0078446303419196
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 101,
+    "description": "Worker received a slight shock and dropped a tool on his foot, bruising his toe.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.9078096620127786,
+    "probabilities": [
+      0.0146748264299146,
+      0.043673185515008,
+      0.9078096620127786,
+      0.0277998091212168,
+      0.0060425169210822
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 102,
+    "description": "A small piece of ore (2 kg) fell from a truck and hit the worker's shoulder; contusion and stiffness.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.8493800026629753,
+    "probabilities": [
+      0.0151327184711263,
+      0.0821192262645355,
+      0.8493800026629753,
+      0.0471348120603534,
+      0.0062332405410094
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 103,
+    "description": "In the region of Povoado Vista - Martin\u00f3pole - CE, the employee F\u00e1bio de Vieira performed soil collection activities in the field, together with the auxiliaries Manoel da Silva and Diassis do Nascimento, when around 10:00 am, when crossing a fence his glove was attached to the wire and his body projected forward causing a slight twist of the left wrist. The team traveled to the city of Granja and the employee was referred to the hospital for consultation. The doctor did not diagnose a fracture, prescribing remedy for local pain and ice packs. By medical evaluation the employee can carry out his activities normally.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.9858080927894854,
+    "probabilities": [
+      0.9858080927894854,
+      0.0131061631076288,
+      0.0001244410829453,
+      0.0003316084518645,
+      0.0006296945680757
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 104,
+    "description": "At 10:00 a.m. on April 27, 2017, Employee #1 was descending a ladder from a roof. The ladder slipped and the employee fell. No injury details were provided. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.7830834017589461,
+    "probabilities": [
+      0.0190082862026686,
+      0.1072768763688258,
+      0.0253048856268701,
+      0.0653265500426893,
+      0.7830834017589461
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 105,
+    "description": "A small flame from a torch singed the worker's eyebrow hair; no burn to skin.",
+    "actual_severity": 2,
+    "predicted_severity": 3,
+    "confidence": 0.7898853230163128,
+    "probabilities": [
+      0.0404427069577818,
+      0.1421958382229158,
+      0.7898853230163128,
+      0.019948926702995,
+      0.0075272050999945
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 106,
+    "description": "At 10:00 a.m. on April 20, 2017, an employee was tasked with replacing a bolt on a pneumatic cylinder of a Sutton press. Without implementing lockout/tagout procedures, the employee began replacement of the bolt. However, the equipment cycled and his right thumb was struck by the ram of the press. His thumb was amputated as a result. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.931602189297332,
+    "probabilities": [
+      0.0306398993624055,
+      0.0245580295435444,
+      0.0027142478051419,
+      0.0104856339915761,
+      0.931602189297332
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 107,
+    "description": "At 2:00 p.m. on April 20, 2017, an employee was looking for a container he was trying to pick up from the port of Houston. The employee was struck by a gantry crane and the employee's leg was amputated. The employee was killed. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.7593753875478148,
+    "probabilities": [
+      0.0016948662119798,
+      0.0006687849287064,
+      0.1045375545987372,
+      0.1337234067127616,
+      0.7593753875478148
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 108,
+    "description": "A small spark from a grinder caused a flash; worker experienced temporary afterimage, no burn.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8817663260302337,
+    "probabilities": [
+      0.0315222322161648,
+      0.8817663260302337,
+      0.0391745512929337,
+      0.0402327717300424,
+      0.0073041187306252
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 109,
+    "description": "Chemical reactor overheated causing a fire. Worker suffered smoke inhalation and second-degree burns.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.95129150977561,
+    "probabilities": [
+      0.010008537708007,
+      0.034954449409139,
+      0.0010392400196503,
+      0.95129150977561,
+      0.0027062630875936
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 110,
+    "description": "When conducting inspection to evaluate activity to be carried out in the pump house of the Ustulation steam station, it was struck by sulfuric acid spills from a line located above the house of thermal recovery boiler pumps.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.7569689067883789,
+    "probabilities": [
+      0.7569689067883789,
+      0.0050028919974885,
+      0.0290548906715726,
+      0.1717199613330394,
+      0.0372533492095204
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 111,
+    "description": "Underground rock fall from the ceiling (loose ground) struck worker on the shoulder causing clavicle and scapula fractures.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.8613311860265526,
+    "probabilities": [
+      0.0402079267396884,
+      0.0217804535550491,
+      0.0639174988095768,
+      0.8613311860265526,
+      0.0127629348691329
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 112,
+    "description": "Worker fell from a 7 m scaffolding. Multiple spinal fractures.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9269799513642218,
+    "probabilities": [
+      0.0076232238459311,
+      0.026208720153101,
+      0.0303477242152297,
+      0.9269799513642218,
+      0.0088403804215161
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 113,
+    "description": "Fell from 8 m platform. Spinal fracture.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9205041702023172,
+    "probabilities": [
+      0.0105521821844435,
+      0.0212784067239967,
+      0.0404006840444768,
+      0.9205041702023172,
+      0.0072645568447654
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 114,
+    "description": "At times when the mill operator proceeded to remove the vitaulic flange connecting the suction pipe to the pump housing 8B; with the intention of de-sanding the system, when removing the flange, the mineral pulp comes out under pressure and impacts on the face and wrist of his left hand generating the lesion described. At the time of the accident, both the secondary mill No. 4 and the pumps 8A and 8B were blocked for maintenance work and the mill operator used his safety glasses.",
+    "actual_severity": 2,
+    "predicted_severity": 5,
+    "confidence": 0.5574792754352795,
+    "probabilities": [
+      0.2290206349639037,
+      0.0134576158989867,
+      0.0002256429949758,
+      0.1998168307068541,
+      0.5574792754352795
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 115,
+    "description": "At 8:30 a.m. on May 1, 2017, an employee was removing a pipe from a rail car. The employee attempted to carry a large pipe from the top of a rail car and fell off.  The employee received fractures to face and wrists. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.979351814141369,
+    "probabilities": [
+      0.007352427757251,
+      0.0023334041046526,
+      0.0042576259302941,
+      0.0067047280664331,
+      0.979351814141369
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 116,
+    "description": "At 7:30 a.m. on June 30, 2017, an employee was inserting a match fuze into a fireworks charge.  The fireworks exploded and both of the employee's hands were amputated. ",
+    "actual_severity": 5,
+    "predicted_severity": 5,
+    "confidence": 0.7673280772078256,
+    "probabilities": [
+      0.0176186860948067,
+      0.0768962745668297,
+      0.0830127484220916,
+      0.0551442137084463,
+      0.7673280772078256
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 117,
+    "description": "Being 5:40 pm approx. when the collaborator Mr. Duval (sampler), was preparing to change and remove the buckets from the pulp samples of the plant courier, he slipped and fell to the ground supporting himself with the right hand generating the lesion described.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.6214324262089522,
+    "probabilities": [
+      0.6214324262089522,
+      0.1626124558328966,
+      0.1068848600486698,
+      0.0492681956740927,
+      0.0598020622353884
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 118,
+    "description": "Worker felt a static shock from a metal rack; he jerked and bumped his elbow, minor bruise.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.858873312771384,
+    "probabilities": [
+      0.0835619372575331,
+      0.858873312771384,
+      0.0285935119714197,
+      0.0179455833850423,
+      0.0110256546146205
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 119,
+    "description": "Worker struck by a battery-powered haulage vehicle. Fractured clavicle and multiple rib fractures.",
+    "actual_severity": 4,
+    "predicted_severity": 4,
+    "confidence": 0.9678616864987882,
+    "probabilities": [
+      0.0032810326298834,
+      0.0101726324978712,
+      0.0126145363864509,
+      0.9678616864987882,
+      0.0060701119870062
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 120,
+    "description": "After having carried out the mechanized support with the Scissor # 200, the heavy equipment operator picks up the water supply hose towards the drum of the equipment and, while He was heading towards the cabin of the Scissor on the way on a piece of rock - 10 cm high approx. - which displaces by sliding his right foot causing the injury described.",
+    "actual_severity": 1,
+    "predicted_severity": 1,
+    "confidence": 0.5297909668910049,
+    "probabilities": [
+      0.5297909668910049,
+      0.2342099488882256,
+      0.0492722458687587,
+      0.1344125566045128,
+      0.0523142817474979
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 121,
+    "description": "Team of the VMS Project performed soil collection on the Xix\u00e1s target with 3 members. When the teams were moving from one collection point to another, Mr. Fabio was ahead of the team, stinging behind Robson and Manoel da Silva. near the collection point were surprised by a swarm of bees that was inside a I play near the ground, with no visibility in the woods and no hissing noise. Fabio passed by the stump, but Robson and Manoel da Silva were attacked by the bees. Robson had a sting in his left arm over his uniform and Manoel da Silva had a prick in his lip as his screen ripped as he tangled in the branches during the escape.",
+    "actual_severity": 1,
+    "predicted_severity": 2,
+    "confidence": 0.7364219340876463,
+    "probabilities": [
+      0.2227604512261551,
+      0.7364219340876463,
+      3.236625736622102e-05,
+      0.0054599470735633,
+      0.0353253013552689
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 122,
+    "description": "A small drop of mild acid solution splashed onto the worker's glove; no skin contact, but caused a slight discoloration of the glove material.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.7878439559551492,
+    "probabilities": [
+      0.2041688852557123,
+      0.7878439559551492,
+      0.0057513165964219,
+      0.0011555828635093,
+      0.001080259329207
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 123,
+    "description": "Worker slipped on a wet floor and fell from a 0.3 m height; bruised his knee and scraped his hand.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8272089029693505,
+    "probabilities": [
+      0.1033260320693847,
+      0.8272089029693505,
+      0.0299287523819426,
+      0.0231535675986176,
+      0.0163827449807045
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 124,
+    "description": "A small detonation sent a pebble into the worker's leg; minor bruise and scratch.",
+    "actual_severity": 2,
+    "predicted_severity": 2,
+    "confidence": 0.8774978897247778,
+    "probabilities": [
+      0.066854181740055,
+      0.8774978897247778,
+      0.034158355328643,
+      0.0149069115570246,
+      0.0065826616494993
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 125,
+    "description": "A small grease fire was quickly extinguished, but the worker sustained a minor 1st\u2011degree burn on his hand from the heat.",
+    "actual_severity": 3,
+    "predicted_severity": 3,
+    "confidence": 0.7661049484650584,
+    "probabilities": [
+      0.0473423370762101,
+      0.1197629404868792,
+      0.7661049484650584,
+      0.050614235690148,
+      0.016175538281704
+    ],
+    "correct": true,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 126,
+    "description": "When performing the movement of the bar to make room and place a calibrator. Mr. Chuquillanqui pushes the bar with both hands turning it, being at that moment imprisoned the middle finger of the left hand against the other bar that was ahead.",
+    "actual_severity": 2,
+    "predicted_severity": 1,
+    "confidence": 0.6805192665205357,
+    "probabilities": [
+      0.6805192665205357,
+      0.1908280417313777,
+      0.0927586321896584,
+      0.0190220190674898,
+      0.0168720404909382
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  },
+  {
+    "id": 127,
+    "description": "When the Mixer 01 of the E.C.M INCIMMET S.A, moved by the positive south ramp, with direction to surface (Unicon concrete plant), at the height of the 3630 (Before 440), the operator observes that untimely lights and the engine go off, the control controls do not respond and the equipment starts to reverse. At 3 meters the operator jumps out of the cabin and at 20 meters the team hits the right gable and turns to its side left. In the area, in the circumstances of the event there was no presence of personnel or equipment that could have been affected.",
+    "actual_severity": 2,
+    "predicted_severity": 4,
+    "confidence": 0.9584125286873414,
+    "probabilities": [
+      0.0267714850940519,
+      7.415525565723694e-05,
+      0.009012424243934,
+      0.9584125286873414,
+      0.0057294067190153
+    ],
+    "correct": false,
+    "fusion_type": "Transformer+Bayesian+KnowledgeGraph"
+  }
+]
