@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>WHSAT · Live Safety Analytics Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0b0f1a;--panel:#141d2b;--panel2:#101827;--line:#1f2a3f;--text:#e8edf5;--muted:#8192ad;--blue:#2a8bf2;--green:#4ade80;--amber:#f59e0b;--red:#ef4444}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,system-ui,sans-serif}button,select,input{font:inherit}
+header{position:sticky;top:0;z-index:10;background:#101827;border-bottom:1px solid var(--line);padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.brand{font-size:20px;font-weight:750}.brand b{color:#69a9ff}.live{display:flex;align-items:center;gap:8px;color:#a8bad3;font-size:13px}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(74,222,128,.12)}
+nav{display:flex;gap:7px;flex-wrap:wrap}nav button{border:0;background:transparent;color:#8fa0bb;padding:8px 13px;border-radius:999px;cursor:pointer}nav button.active{background:#1d3a5c;color:#7bb3ff}main{max-width:1550px;margin:auto;padding:22px}.page{display:none}.page.active{display:block}.grid{display:grid;gap:18px}.kpis{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:20px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:900px){.two,.three{grid-template-columns:1fr}}
+.card,.kpi{background:var(--panel);border:1px solid var(--line);border-radius:15px}.card{padding:18px;margin-bottom:18px}.kpi{padding:16px}.label{font-size:12px;text-transform:uppercase;letter-spacing:.55px;color:#7f91ad}.value{font-size:27px;font-weight:800;margin-top:6px}.sub{font-size:12px;color:#7186a7;margin-top:5px}.card h3{margin:0 0 13px;font-size:17px}.chart{height:290px}.chart.tall{height:350px}.muted{color:var(--muted)}.badge{display:inline-flex;padding:3px 10px;border-radius:999px;font-size:12px;background:#1d3a5c;color:#7bb3ff}.ok{color:#8ff0ae}.warn{color:#ffd37a}.bad{color:#ff9a9a}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.notice{padding:12px 14px;border-radius:10px;background:#0f1724;border-left:3px solid var(--amber);margin:8px 0;color:#ccd7e8;font-size:13px;line-height:1.5}.notice.bad{border-left-color:var(--red);color:#ffd0d0}.notice.ok{border-left-color:var(--green);color:#cbf7d7}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}th{color:#8ea0bc;font-weight:650}.status-pill{padding:2px 8px;border-radius:999px;font-size:11px}.status-pill.ok{background:#123a27}.status-pill.bad{background:#421d25}.heatmap{display:grid;gap:4px;min-width:700px}.heatcell{padding:8px 6px;text-align:center;border-radius:6px;background:#18212e;font-size:12px}.heathead{color:#90a1bd;font-weight:700}.heatrow{color:#c9d6e8;text-align:left}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.toolbar input,.toolbar textarea{min-width:340px;max-width:70vw;background:#0f1724;border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:9px}.toolbar textarea{width:min(760px,90vw);min-height:110px;resize:vertical}.toolbar button{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:8px 12px;cursor:pointer}.small{font-size:12px}.probbar{display:flex;height:24px;border-radius:8px;overflow:hidden;background:#0f1724}.probseg{display:flex;align-items:center;justify-content:center;min-width:28px;font-size:11px;font-weight:700}.footer-note{font-size:12px;color:#6f87aa;padding:8px 0 18px}.metric-good{color:#8ff0ae}.metric-bad{color:#ff9a9a}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="brand"><b>WHSAT</b> · Live Safety Analytics</div><div class="small muted">Notebook-driven dashboard · no hard-coded analytical values</div></div>
+  <nav id="nav"></nav>
+  <div class="live"><span class="dot" id="liveDot"></span><span id="liveText">Connecting…</span></div>
+</header>
+<main>
+  <section class="page active" id="overview"></section>
+  <section class="page" id="eda"></section>
+  <section class="page" id="transformer"></section>
+  <section class="page" id="uncertainty"></section>
+  <section class="page" id="kg"></section>
+  <section class="page" id="fusion"></section>
+  <section class="page" id="pipeline"></section>
+  <section class="page" id="evaluator"></section>
+  <div class="footer-note">Dashboard data is loaded once when this page opens. To load newer GitHub data, refresh the browser manually.</div>
+</main>
+<script>
+const PAGES=[['overview','Overview'],['eda','EDA'],['transformer','Transformer'],['uncertainty','Uncertainty'],['kg','Knowledge Graph'],['fusion','Fusion'],['pipeline','Pipeline Health'],['evaluator','Evaluator']];
+const params=new URLSearchParams(location.search);
+const DATA_URL=params.get('data')||window.WHSAT_DATA_URL||'dashboard_snapshot.json';
+const EVALUATOR_CASES_URL=params.get('cases')||window.WHSAT_EVALUATOR_CASES_URL||'evaluator_cases.json';
+let evaluatorCases=[];
+let evaluatorIndex=0;
+let evaluatorLoaded=false;
+const charts={}; let snapshot=null;
+function fmt(v,d=2){return (v===null||v===undefined||Number.isNaN(Number(v)))?'—':Number(v).toFixed(d)}
+function pct(v,d=1){return (v===null||v===undefined)?'—':(Number(v)*100).toFixed(d)+'%'}
+function intfmt(v){return (v===null||v===undefined)?'—':Number(v).toLocaleString()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function nav(){const n=document.getElementById('nav');n.innerHTML=PAGES.map(([id,label],i)=>`<button data-id="${id}" class="${i===0?'active':''}">${label}</button>`).join('');n.querySelectorAll('button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(b.dataset.id).classList.add('active');n.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');setTimeout(()=>window.dispatchEvent(new Event('resize')),60)})}
+function destroy(prefix){Object.keys(charts).filter(k=>k.startsWith(prefix)).forEach(k=>{charts[k].destroy();delete charts[k]})}
+function chart(id,type,labels,datasets,options={}){const el=document.getElementById(id);if(!el)return;if(charts[id])charts[id].destroy();charts[id]=new Chart(el,{type,data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#c8d6e8'}}},scales:type==='doughnut'?{}:{x:{ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}},y:{beginAtZero:true,ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}}},...options}})}
+function kpi(label,value,sub=''){return `<div class="kpi"><div class="label">${label}</div><div class="value">${value}</div><div class="sub">${sub}</div></div>`}
+function warningHtml(warnings){return (warnings||[]).map(w=>`<div class="notice bad">${esc(w)}</div>`).join('')}
+function renderOverview(s){destroy('ov');const o=s.overview||{}, e=s.eda||{}, t=s.transformer||{};document.getElementById('overview').innerHTML=`
+<div class="grid kpis">${kpi('Total incidents',intfmt(o.total_incidents),'train + test currently loaded')}${kpi('High severity (4–5)',intfmt(o.high_severity_count),pct(o.high_severity_pct)+' of loaded incidents')}${kpi('Avg near-miss gap',fmt(o.avg_near_miss_gap,2),'potential severity − actual severity')}${kpi('Transformer macro F1',fmt(o.transformer_macro_f1,3),'computed from prediction CSV')}${kpi('Avg confidence',pct(o.avg_confidence),'Transformer prediction confidence')}${kpi('Saved fusion ready',o.fusion_ready?'<span class="metric-good">YES</span>':'<span class="metric-bad">NO</span>','Transformer + independent Bayesian inputs')}</div>
+<div class="grid two"><div class="card"><div class="section-title"><h3>Severity distribution</h3><span class="badge">live from train/test</span></div><div class="chart"><canvas id="ovSeverity"></canvas></div></div><div class="card"><div class="section-title"><h3>Near-miss gap by severity</h3><span class="badge">computed</span></div><div class="chart"><canvas id="ovGap"></canvas></div></div></div>
+<div class="card"><div class="section-title"><h3>Incident trend</h3><span class="badge">parsed dates</span></div><div class="chart"><canvas id="ovTrend"></canvas></div></div>`;
+const sd=e.severity_distribution||[];chart('ovSeverity','bar',sd.map(x=>x.label),[{label:'Incidents',data:sd.map(x=>x.count),backgroundColor:'#2a8bf2',borderRadius:6}],{plugins:{legend:{display:false}}});const gap=e.gap_by_severity||[];chart('ovGap','bar',gap.map(x=>x.label),[{label:'Mean gap',data:gap.map(x=>x.mean_gap),backgroundColor:'#f59e0b',borderRadius:6}],{plugins:{legend:{display:false}}});const mt=e.monthly_trend||[];chart('ovTrend','line',mt.map(x=>x.month),[{label:'Incidents',data:mt.map(x=>x.count),borderColor:'#2a8bf2',backgroundColor:'rgba(42,139,242,.08)',fill:true,tension:.25,pointRadius:2}]);}
+function renderEDA(s){destroy('eda');const e=s.eda||{};document.getElementById('eda').innerHTML=`<div class="grid two"><div class="card"><h3>Incidents by industry sector</h3><div class="chart"><canvas id="edaSector"></canvas></div></div><div class="card"><h3>Average near-miss gap by sector</h3><div class="chart"><canvas id="edaSectorGap"></canvas></div></div></div><div class="card"><h3>Top critical risks × severity</h3><div class="table-wrap" id="riskHeat"></div></div>`;const sc=e.sector_counts||[];chart('edaSector','bar',sc.map(x=>x.sector),[{label:'Incidents',data:sc.map(x=>x.count),backgroundColor:'#2a8bf2',borderRadius:5}],{indexAxis:'y',plugins:{legend:{display:false}}});const sg=e.sector_gap||[];chart('edaSectorGap','bar',sg.map(x=>x.sector),[{label:'Mean gap',data:sg.map(x=>x.mean_gap),backgroundColor:'#f59e0b',borderRadius:5}],{indexAxis:'y',plugins:{legend:{display:false}}});renderHeat(e.critical_risk_heatmap||{});}
+function renderHeat(h){const box=document.getElementById('riskHeat');if(!box)return;const risks=h.risks||[],sevs=h.severities||[],m=h.matrix||[];if(!risks.length){box.innerHTML='<div class="muted">No critical-risk heatmap data available.</div>';return}let html=`<div class="heatmap" style="grid-template-columns:minmax(220px,1.5fr) repeat(${sevs.length},1fr)"><div></div>${sevs.map(x=>`<div class="heatcell heathead">Severity ${x}</div>`).join('')}`;let max=Math.max(1,...m.flat());risks.forEach((r,i)=>{html+=`<div class="heatcell heatrow">${esc(r)}</div>`;(m[i]||[]).forEach(v=>{const a=.15+.75*(v/max);html+=`<div class="heatcell" style="background:rgba(239,68,68,${a})">${v}</div>`})});box.innerHTML=html+'</div>';}
+function reportTable(rep){if(!rep?.length)return'<div class="muted">No classification report available.</div>';return `<div class="table-wrap"><table><thead><tr><th>Class</th><th>Precision</th><th>Recall</th><th>F1</th><th>Support</th></tr></thead><tbody>${rep.map(r=>`<tr><td>${r.label}</td><td>${fmt(r.precision,3)}</td><td>${fmt(r.recall,3)}</td><td>${fmt(r.f1,3)}</td><td>${intfmt(r.support)}</td></tr>`).join('')}</tbody></table></div>`}
+function renderTransformer(s){destroy('tr');const t=s.transformer||{};document.getElementById('transformer').innerHTML=`<div class="grid kpis">${kpi('Accuracy',fmt(t.metrics?.accuracy,3),'test predictions')}${kpi('Macro F1',fmt(t.metrics?.macro_f1,3),'5 severity classes')}${kpi('ECE',fmt(t.ece,3),'lower is better')}${kpi('Test cases',intfmt(t.metrics?.n),'prediction CSV rows')}</div><div class="grid two"><div class="card"><h3>Class-wise F1</h3><div class="chart"><canvas id="trF1"></canvas></div></div><div class="card"><h3>Confidence distribution</h3><div class="chart"><canvas id="trConf"></canvas></div></div></div><div class="card"><h3>Classification report</h3>${reportTable(t.class_report)}</div>`;const rep=t.class_report||[];chart('trF1','bar',rep.map(x=>x.label),[{label:'F1',data:rep.map(x=>x.f1),backgroundColor:'#2a8bf2',borderRadius:6}],{plugins:{legend:{display:false}},scales:{y:{min:0,max:1,ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}},x:{ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}}}});const h=t.confidence_histogram||[];chart('trConf','bar',h.map(x=>x.label),[{label:'Count',data:h.map(x=>x.count),backgroundColor:'#5f9ef0',borderRadius:4}],{plugins:{legend:{display:false}}});}
+function renderUncertainty(s){destroy('unc');const t=s.transformer||{};document.getElementById('uncertainty').innerHTML=`<div class="grid kpis">${kpi('Average confidence',pct(t.avg_confidence),'Transformer predictions')}${kpi('High-uncertainty cases',intfmt(t.high_uncertainty_count),'confidence < 60%')}${kpi('Expected calibration error',fmt(t.ece,3),'computed from class probabilities')}</div><div class="grid two"><div class="card"><h3>Confidence histogram</h3><div class="chart tall"><canvas id="uncHist"></canvas></div></div><div class="card"><h3>Calibration curve</h3><div class="chart tall"><canvas id="uncCal"></canvas></div></div></div>`;const h=t.confidence_histogram||[];chart('uncHist','bar',h.map(x=>x.label),[{label:'Predictions',data:h.map(x=>x.count),backgroundColor:'#2a8bf2',borderRadius:4}],{plugins:{legend:{display:false}}});const cal=t.calibration||[];const labels=[0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1];const sets=[{label:'Perfect',data:labels,borderColor:'#6f87aa',borderDash:[6,4],pointRadius:0}];cal.forEach(c=>{const d=labels.map(x=>{const p=(c.points||[]).reduce((best,z)=>Math.abs(z.predicted-x)<Math.abs((best?.predicted??99)-x)?z:best,null);return p&&Math.abs(p.predicted-x)<.07?p.observed:null});sets.push({label:'Severity '+c.class,data:d,spanGaps:true,tension:.2})});chart('uncCal','line',labels.map(x=>x.toFixed(1)),sets,{scales:{y:{min:0,max:1,ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}},x:{ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}}}});}
+function renderKG(s){destroy('kg');const k=s.kg||{};document.getElementById('kg').innerHTML=`<div class="grid kpis">${kpi('Processed incidents',intfmt(k.processed_incidents),'KG feature rows')}${kpi('Train KG rows',intfmt(k.train_rows),'training subset')}${kpi('Test KG rows',intfmt(k.test_rows),'required for clean fusion')}${kpi('Control entity coverage',pct(k.control_entity_coverage),'incidents with ≥1 Control entity')}</div><div class="grid two"><div class="card"><h3>Entity totals</h3><div class="chart tall"><canvas id="kgEntities"></canvas></div></div><div class="card"><h3>Rule violations</h3><div class="chart tall"><canvas id="kgRules"></canvas></div></div></div>`;const e=(k.entity_counts||[]).slice(0,12);chart('kgEntities','bar',e.map(x=>x.entity_type),[{label:'Entities',data:e.map(x=>x.total),backgroundColor:'#2a8bf2',borderRadius:4}],{indexAxis:'y',plugins:{legend:{display:false}}});const v=k.violations||[];chart('kgRules','bar',v.map(x=>x.rule),[{label:'Violations',data:v.map(x=>x.count),backgroundColor:'#ef4444',borderRadius:4}],{indexAxis:'y',plugins:{legend:{display:false}}});}
+function renderFusion(s){destroy('fu');const f=s.fusion||{},w=s.pipeline?.warnings||[];document.getElementById('fusion').innerHTML=`<div class="grid kpis">${kpi('Saved 2-model fusion',f.pipeline_valid?'<span class="metric-good">READY</span>':'<span class="metric-bad">INCOMPLETE</span>','Transformer + Bayesian weighted ensemble')}${kpi('Full T+B+KG fusion',f.full_three_model_valid?'<span class="metric-good">READY</span>':'<span class="metric-bad">NOT YET</span>','only true when saved predictions actually include KG')}${kpi('Accuracy',fmt(f.metrics?.accuracy,3),'only interpret if valid')}${kpi('Macro F1',fmt(f.metrics?.macro_f1,3),'only interpret if valid')}${kpi('Average confidence',pct(f.avg_confidence),'fusion_predictions.csv')}</div>${warningHtml(w)}<div class="card"><h3>Fusion classification report</h3>${reportTable(f.class_report)}</div>`;}
+function renderPipeline(s){const p=s.pipeline||{};document.getElementById('pipeline').innerHTML=`<div class="card"><div class="section-title"><h3>Notebook artifact health</h3><span class="badge">generated ${esc(s.meta?.generated_at_utc||'unknown')}</span></div><div class="table-wrap"><table><thead><tr><th>Artifact</th><th>Status</th><th>Modified UTC</th><th>Size</th></tr></thead><tbody>${(p.artifacts||[]).map(a=>`<tr><td>${esc(a.name)}</td><td><span class="status-pill ${a.present?'ok':'bad'}">${a.present?'present':'missing'}</span></td><td>${esc(a.modified_utc||'—')}</td><td>${a.size_bytes?Number(a.size_bytes).toLocaleString()+' B':'—'}</td></tr>`).join('')}</tbody></table></div></div><div class="card"><h3>Pipeline warnings</h3>${p.warnings?.length?warningHtml(p.warnings):'<div class="notice ok">All required artifacts are present and no known dashboard integrity warnings were detected.</div>'}</div>`;}
+
+
+// ============================================================
+// STATIC INTERACTIVE EVALUATOR
+// New text is matched to saved, real T+B+KG evaluation cases.
+// No model is rerun in the browser.
+// ============================================================
+
+let evaluatorIndexCache = null;
+
+const EVAL_STOPWORDS = new Set([
+  'a','an','the','and','or','but','if','then','than','to','of','in','on','at','by','for','from','with','without',
+  'into','onto','during','before','after','while','is','are','was','were','be','been','being','it','its','this','that',
+  'these','those','as','not','no','yes','he','she','they','them','their','his','her','we','our','you','your','i',
+  'has','have','had','having','do','does','did','doing','can','could','should','would','may','might','will','shall',
+  'very','more','most','some','any','all','each','every','other','another','such','also','only','just','using','used',
+  'use','work','working','worker','employee','person','people','task','activity','incident'
+]);
+
+function evaluatorTokens(text){
+  const base=String(text||'')
+    .toLowerCase()
+    .replace(/lockout\s*\/?\s*tagout/g,'lockouttagout')
+    .replace(/personal protective equipment/g,'ppe')
+    .replace(/work at height/g,'workatheight')
+    .replace(/fall from height/g,'fallfromheight')
+    .replace(/moving parts/g,'movingparts')
+    .replace(/confined space/g,'confinedspace')
+    .match(/[a-z0-9]+/g) || [];
+
+  const uni=base.filter(t=>t.length>2 && !EVAL_STOPWORDS.has(t));
+  const bi=[];
+  for(let i=0;i<uni.length-1;i++) bi.push(uni[i]+'_'+uni[i+1]);
+  return uni.concat(bi);
+}
+
+function buildEvaluatorIndex(){
+  if(!evaluatorCases.length) return null;
+
+  const docs=evaluatorCases.map(c=>evaluatorTokens(c.description));
+  const df=new Map();
+
+  docs.forEach(tokens=>{
+    new Set(tokens).forEach(t=>df.set(t,(df.get(t)||0)+1));
+  });
+
+  const N=docs.length;
+  const idf=new Map();
+  df.forEach((count,t)=>{
+    idf.set(t,Math.log((N+1)/(count+1))+1);
+  });
+
+  const vectors=docs.map(tokens=>{
+    const tf=new Map();
+    tokens.forEach(t=>tf.set(t,(tf.get(t)||0)+1));
+
+    let norm2=0;
+    const vec=new Map();
+    tf.forEach((count,t)=>{
+      const value=(1+Math.log(count))*(idf.get(t)||1);
+      vec.set(t,value);
+      norm2+=value*value;
+    });
+
+    return {vec,norm:Math.sqrt(norm2)||1};
+  });
+
+  return {idf,vectors};
+}
+
+function queryVector(text,index){
+  const tokens=evaluatorTokens(text);
+  const tf=new Map();
+  tokens.forEach(t=>tf.set(t,(tf.get(t)||0)+1));
+
+  let norm2=0;
+  const vec=new Map();
+
+  tf.forEach((count,t)=>{
+    const value=(1+Math.log(count))*(index.idf.get(t)||Math.log((evaluatorCases.length+1)/1)+1);
+    vec.set(t,value);
+    norm2+=value*value;
+  });
+
+  return {vec,norm:Math.sqrt(norm2)||1,tokens};
+}
+
+function cosineSparse(a,b){
+  let dot=0;
+  const [small,large]=a.vec.size<=b.vec.size?[a.vec,b.vec]:[b.vec,a.vec];
+  small.forEach((v,k)=>{
+    const x=large.get(k);
+    if(x!==undefined) dot+=v*x;
+  });
+  return dot/(a.norm*b.norm || 1);
+}
+
+function renderEvaluator(s){
+  document.getElementById('evaluator').innerHTML=`
+  <div class="card">
+    <div class="section-title">
+      <h3>Interactive safety assessment</h3>
+      <span class="badge">grounded in saved T+B+KG results</span>
+    </div>
+
+    <div class="notice">
+      Enter a new workplace description below. This static GitHub Pages version does <b>not</b> rerun the trained
+      models. Instead, it compares the new description with incidents already evaluated by the
+      Transformer + Bayesian + Knowledge Graph fusion pipeline and derives a similarity-weighted assessment
+      from their genuine saved fusion probabilities.
+    </div>
+
+    <label class="small muted" for="newEvalText">New workplace description</label>
+    <textarea id="newEvalText"
+      style="width:100%;min-height:150px;margin-top:7px;margin-bottom:10px;background:#0f1724;border:1px solid var(--line);color:var(--text);padding:12px;border-radius:10px;resize:vertical"
+      placeholder="Example: A technician removes a machine guard to inspect a moving conveyor while the equipment is still energized..."></textarea>
+
+    <div class="toolbar">
+      <button id="analyzeNewTask">Analyze task</button>
+      <button id="clearNewTask" style="background:#1a2638">Clear</button>
+      <button id="sampleNewTask" style="background:#1a2638">Load example</button>
+      <span id="evalLoadState" class="small muted"></span>
+    </div>
+
+    <div id="evalOut" style="margin-top:16px">
+      <div class="muted">Loading saved T+B+KG evaluation cases…</div>
+    </div>
+  </div>`;
+
+  document.getElementById('analyzeNewTask').onclick=analyzeNewDescription;
+  document.getElementById('clearNewTask').onclick=()=>{
+    document.getElementById('newEvalText').value='';
+    document.getElementById('evalOut').innerHTML='<div class="muted">Enter a description and click <b>Analyze task</b>.</div>';
+  };
+  document.getElementById('sampleNewTask').onclick=()=>{
+    document.getElementById('newEvalText').value=
+      'A maintenance technician opens an electrical motor terminal box to inspect loose wiring. The motor has not been fully isolated and another worker is nearby. Gloves are being worn, but no lockout/tagout device has been applied.';
+  };
+
+  if(evaluatorLoaded){
+    evaluatorIndexCache=buildEvaluatorIndex();
+    document.getElementById('evalLoadState').textContent=`${evaluatorCases.length} saved fusion cases loaded`;
+    document.getElementById('evalOut').innerHTML='<div class="muted">Enter a description and click <b>Analyze task</b>.</div>';
+  }else{
+    loadEvaluatorCases();
+  }
+}
+
+async function loadEvaluatorCases(){
+  const out=document.getElementById('evalOut');
+  const state=document.getElementById('evalLoadState');
+  try{
+    const sep=EVALUATOR_CASES_URL.includes('?')?'&':'?';
+    const r=await fetch(EVALUATOR_CASES_URL+sep+'_ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);
+
+    const data=await r.json();
+    if(!Array.isArray(data)||!data.length)throw new Error('The file contains no evaluation cases.');
+
+    evaluatorCases=data.filter(c=>c && c.description);
+    if(!evaluatorCases.length)throw new Error('No cases contain usable descriptions.');
+
+    evaluatorLoaded=true;
+    evaluatorIndexCache=buildEvaluatorIndex();
+
+    if(state) state.textContent=`${evaluatorCases.length} saved fusion cases loaded`;
+    if(out) out.innerHTML='<div class="muted">Enter a description and click <b>Analyze task</b>.</div>';
+
+  }catch(e){
+    if(state) state.textContent='evaluation cases unavailable';
+    if(out) out.innerHTML=`<div class="notice bad">
+      Could not load <b>${esc(EVALUATOR_CASES_URL)}</b>: ${esc(e.message)}<br>
+      Upload <code>evaluator_cases.json</code> to the same GitHub folder as <code>index.html</code>.
+    </div>`;
+  }
+}
+
+function analyzeNewDescription(){
+  const text=document.getElementById('newEvalText').value.trim();
+  const out=document.getElementById('evalOut');
+
+  if(!text){
+    out.innerHTML='<div class="notice bad">Enter a workplace description first.</div>';
+    return;
+  }
+
+  if(!evaluatorLoaded || !evaluatorCases.length || !evaluatorIndexCache){
+    out.innerHTML='<div class="notice bad">Saved evaluation cases are not loaded yet.</div>';
+    return;
+  }
+
+  const q=queryVector(text,evaluatorIndexCache);
+
+  if(q.tokens.length<2){
+    out.innerHTML='<div class="notice bad">Please enter a more detailed workplace description.</div>';
+    return;
+  }
+
+  const ranked=evaluatorCases.map((c,i)=>{
+    const sim=cosineSparse(q,evaluatorIndexCache.vectors[i]);
+    return {c,i,sim};
+  }).sort((a,b)=>b.sim-a.sim);
+
+  // Top references used in the estimate.
+  const top=ranked.slice(0,5);
+  const maxSim=top[0]?.sim || 0;
+
+  // Similarity-squared weighting emphasizes the closest cases.
+  const weighted=[0,0,0,0,0];
+  let weightSum=0;
+
+  top.forEach(({c,sim})=>{
+    const probs=Array.isArray(c.probabilities)?c.probabilities.map(Number):[];
+    if(probs.length!==5 || probs.some(v=>!Number.isFinite(v))) return;
+
+    const w=Math.max(sim,0.001)**2;
+    weightSum+=w;
+    for(let k=0;k<5;k++) weighted[k]+=w*probs[k];
+  });
+
+  if(weightSum<=0){
+    out.innerHTML='<div class="notice bad">The saved cases do not contain usable fusion probabilities.</div>';
+    return;
+  }
+
+  const estimate=weighted.map(v=>v/weightSum);
+  const pred=estimate.indexOf(Math.max(...estimate))+1;
+  const estProb=Math.max(...estimate);
+
+  let quality='Weak reference match';
+  let qualityClass='bad';
+  if(maxSim>=0.30){quality='Strong reference match';qualityClass='ok';}
+  else if(maxSim>=0.16){quality='Moderate reference match';qualityClass='warn';}
+
+  const topHtml=top.slice(0,3).map(({c,sim},rank)=>{
+    const savedPred=c.predicted_severity!==undefined?`Severity ${esc(c.predicted_severity)}`:'—';
+    const short=String(c.description||'');
+    const correct=c.correct===true?' · saved prediction correct':c.correct===false?' · saved prediction incorrect':'';
+    return `
+      <div style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <div style="display:flex;justify-content:space-between;gap:14px;align-items:flex-start">
+          <b>#${rank+1} · ${pct(sim)} similarity</b>
+          <span class="badge">${savedPred}</span>
+        </div>
+        <div class="small" style="margin-top:6px;line-height:1.5;color:#c8d6e8">${esc(short)}</div>
+        <div class="small muted" style="margin-top:4px">Saved T+B+KG result${correct}</div>
+      </div>`;
+  }).join('');
+
+  out.innerHTML=`
+    <div class="grid kpis">
+      ${kpi('Estimated severity','Severity '+pred,'reference-based estimate')}
+      ${kpi('Estimated probability',pct(estProb),'from weighted saved fusion probabilities')}
+      ${kpi('Closest-case similarity',pct(maxSim),'text similarity to best saved case')}
+      ${kpi('Reference quality',`<span class="metric-${qualityClass==='ok'?'good':qualityClass==='bad'?'bad':'warn'}">${esc(quality)}</span>`,'higher similarity = stronger grounding')}
+    </div>
+
+    <div class="notice ${qualityClass}">
+      <b>Important:</b> This is a static, reference-based assessment grounded in precomputed T+B+KG results.
+      It is <b>not</b> a fresh execution of the trained models on this new description.
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <h3>Similarity-weighted severity distribution</h3>
+        <div class="chart"><canvas id="evalProbChart"></canvas></div>
+        <div class="small muted">
+          The distribution is computed from the genuine saved fusion probability vectors of the five most similar evaluated incidents.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>How this assessment was grounded</h3>
+        <div class="notice ok">
+          Saved source results:<br><br>
+          ✓ Transformer<br>
+          ✓ Bayesian<br>
+          ✓ Knowledge Graph<br>
+          ✓ Final fusion probabilities
+        </div>
+        <div class="small muted">
+          Browser step: TF-IDF text similarity + similarity-weighted averaging of saved fusion probabilities.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Most similar previously evaluated incidents</h3>
+      ${topHtml || '<div class="muted">No similar incidents found.</div>'}
+    </div>
+  `;
+
+  chart(
+    'evalProbChart',
+    'bar',
+    estimate.map((_,i)=>`Severity ${i+1}`),
+    [{label:'Estimated probability',data:estimate,backgroundColor:'#2a8bf2',borderRadius:5}],
+    {
+      plugins:{legend:{display:false}},
+      scales:{
+        y:{min:0,max:1,ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}},
+        x:{ticks:{color:'#7c91b0'},grid:{color:'#1f2a3f'}}
+      }
+    }
+  );
+}
+
+function renderAll(s){renderOverview(s);renderEDA(s);renderTransformer(s);renderUncertainty(s);renderKG(s);renderFusion(s);renderPipeline(s);renderEvaluator(s)}
+async function load(){const dot=document.getElementById('liveDot'),text=document.getElementById('liveText');try{const sep=DATA_URL.includes('?')?'&':'?';const r=await fetch(DATA_URL+sep+'_ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);snapshot=await r.json();renderAll(snapshot);dot.style.background='#4ade80';text.textContent=`Loaded · ${new Date().toLocaleTimeString()} · manual refresh only`;}catch(e){dot.style.background='#ef4444';text.textContent='Data source unavailable';document.getElementById('overview').innerHTML=`<div class="card"><h3>Dashboard data not found</h3><div class="notice bad">Could not load <b>${esc(DATA_URL)}</b>: ${esc(e.message)}</div><p class="muted">Place <code>dashboard_snapshot.json</code> beside this HTML file, or open the dashboard with <code>?data=https://raw.githubusercontent.com/.../dashboard_snapshot.json</code>.</p></div>`;}}
+nav();load();
+</script>
+</body>
+</html>
